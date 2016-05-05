@@ -1,0 +1,12 @@
+{
+	"name": "rip",
+	"description": "Raster and Image processor",
+	"copyright": "Copyright © 2016, Oleg Baharew, Roman Vlasov",
+	"license": "GPL-3.0",
+	"authors": ["Oleg Baharev (aka aquaratixc)", "Roman Vlasov"],
+	"dependencies": {
+		"dlib": {
+			"version" : "*"
+		}
+	}
+}
