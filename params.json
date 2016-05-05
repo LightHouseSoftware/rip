@@ -1,0 +1,6 @@
+{
+  "name": "Rip",
+  "tagline": "Rastr and Image Processor",
+  "body": "# RIP\r\n\r\nRIP is a library for complex image processing.\r\n\r\n## License\r\n\r\nGPLv3\r\n\r\n## How to use RIP?\r\n\r\nPackage in your `dub.json`:\r\n```d\r\n   {\r\n      \"dependencies\": {\r\n        \"rip\": \"~>0.0.1\"\r\n      }\r\n   }\r\n```\r\n## Dependencies\r\n\r\nRIP needs dlib library for loading jpeg/png/bmp/tga files.\r\nWARNING: image can be saved ONLY in ppm/pam/png formats.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
