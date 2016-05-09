@@ -17,12 +17,10 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 	Surface surface = new Surface(width, height);
 	auto imageArray = r.array;
 
-	foreach (i; 0 .. width)
-	{
-		foreach (j; 0 .. height)
-		{
-			surface[i, j] = imageArray[j * width + i];
-		}
+	auto s = width * height;
+
+	foreach(i; 0..s) {
+		surface[i] = imageArray[i];
 	}
 
 	return surface;
