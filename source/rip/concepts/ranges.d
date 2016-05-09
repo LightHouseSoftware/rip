@@ -3,7 +3,7 @@ module rip.concepts.ranges;
 private
 {
 	import std.algorithm;
-	import std.array;
+	import std.stdio;
 	import std.range;
 
 	import rip.concepts.color;
@@ -15,12 +15,12 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 	if (is(ElementType!Range == RGBColor))
 {
 	Surface surface = new Surface(width, height);
-	auto imageArray = r.array;
 
 	auto s = width * height;
 
 	foreach(i; 0..s) {
-		surface[i] = imageArray[i];
+		surface[i] = r.front;
+		r.popFront();
 	}
 
 	return surface;
@@ -75,6 +75,83 @@ auto createPixels(Range)(Range r)
 	return PixelRange(r);
 }
 
+auto createFencesNew(T, U)(Surface surface, T width, U height) {
+
+		struct Fence {
+			uint surfacePixelIndex;
+			uint processedIndex = 0;
+
+			uint x, y;
+			uint halfFenceWidth, halfFenceHeight;
+
+			auto opIndex(uint index) {
+				uint h = cast(int)(index % width);
+				uint w = cast(int)(index / width);
+
+				auto indexW = x + (halfFenceWidth - w);
+				auto indexH = y + (halfFenceHeight - h);
+
+				if ((indexW < 0) || (indexH >= surface.getArea!int)) {
+					return new RGBColor(255, 255, 255);
+				}
+				else {
+					return surface[indexW, indexH];
+				}
+			}
+
+			this(	uint surfacePixelIndex,
+					uint halfFenceWidth, uint halfFenceHeight) {
+
+				this.surfacePixelIndex = surfacePixelIndex;
+				this.halfFenceWidth = halfFenceWidth;
+				this.halfFenceHeight = halfFenceHeight;
+
+				x = surfacePixelIndex % surface.getWidth!uint;
+				y = surfacePixelIndex / surface.getWidth!uint;
+			}
+
+			auto front() {
+				return this.opIndex(processedIndex);
+			}
+
+			void popFront() {
+				processedIndex++;
+			}
+
+			bool empty() {
+				return processedIndex == width * height;
+			}
+		}
+
+		struct FenceRange {
+			int processedIndex = 0;
+
+			Surface _surface;
+			uint halfFenceWidth, halfFenceHeight;
+
+			this(Surface _surface) {
+				this._surface = _surface;
+
+				halfFenceWidth = cast(uint) width / 2;
+				halfFenceHeight = cast(uint) height / 2;
+			}
+
+			Fence front() {
+				return Fence(	processedIndex,
+								halfFenceWidth, halfFenceHeight);
+			}
+
+			void popFront() {
+				processedIndex++;
+			}
+
+			bool empty() {
+				return processedIndex == surface.getArea!int;
+			}
+		}
+
+		return FenceRange(surface);
+}
 
 auto createFences(T, U)(Surface surface, T width, U height)
 {
