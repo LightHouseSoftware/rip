@@ -46,7 +46,7 @@ GPLv3
 
 The most funcs has their analogs for working with ranges.
 
-## In planes
+## In plans
    *  add more operations for histograms
    *  add more drawing funcs
    *  add more formats into IO package
