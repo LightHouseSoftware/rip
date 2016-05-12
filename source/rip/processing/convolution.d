@@ -59,3 +59,12 @@ auto convolve(Surface surface, LinearFilter filter)
 			.toSurface(surface.getWidth!int, surface.getHeight!int);
 	return image;
 }
+
+auto convolveNew(Surface surface, LinearFilter filter)
+{
+	auto image = surface
+		.createFencesNew(filter.getWidth, filter.getHeight)
+			.convolution(filter)
+			.toSurface(surface.getWidth!int, surface.getHeight!int);
+	return image;
+}
