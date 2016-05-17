@@ -45,8 +45,9 @@ auto toGrayScale(Range)(Range r, GrayPalette palette = GrayPalette.STANDART)
 			};
 			break;
 	}
-	auto range = map!(a => grayFunction(a))(r).array;
-	return createPixels(range);
+	//auto range = map!(a => grayFunction(a))(r).array;
+	//return createPixels(range);
+	return r.map!(a => grayFunction(a));
 }
 
 auto toGrayScale(Surface surface, GrayPalette palette = GrayPalette.STANDART)

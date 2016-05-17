@@ -4,7 +4,7 @@ private
 {
 	import std.algorithm;
 	import std.range;
-	
+
 	import rip.concepts.ranges;
 	import rip.concepts.color;
 	import rip.concepts.surface;
@@ -12,8 +12,9 @@ private
 
 auto toNegative(Range)(Range r, RGBColor color = new RGBColor(255, 255, 255))
 {
-	auto range = map!(a => color - a)(r).array;
-	return createPixels(range);
+	//auto range = map!(a => color - a)(r).array;
+	//return createPixels(range);
+	return r.map!(a => color - a);
 }
 
 
