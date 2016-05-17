@@ -24,9 +24,8 @@ auto roughPixels(Range, T)(Range r, T numberOfColor)
 		return new RGBColor(R %= N, G %= N, B %= N);
 	};
 
-	//auto range = map!(a => roughFunction(a))(r).array;
-	//return createPixels(range);
-	return r.map!(a => roughFunction(a));
+	auto range = map!(a => roughFunction(a))(r).array;
+	return createPixels(range);
 }
 
 // огрубление (т.е срезание диапазона присутствующих цветов и их оттенков)

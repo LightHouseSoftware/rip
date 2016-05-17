@@ -28,14 +28,14 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 
 auto createPixels(Range)(Range r)
 {
-	struct PixelRange(Range)
+	struct PixelRange
 	{
-		//private RGBColor[] pixels;
-		Range pixels;
+		private RGBColor[] pixels;
 
 		this(Range)(Range r)
+			if (is(ElementType!Range == RGBColor))
 		{
-			pixels = r;
+			pixels = r.array;
 		}
 
 		@property
@@ -72,7 +72,7 @@ auto createPixels(Range)(Range r)
 		}
 	}
 
-	return PixelRange!Range(r);
+	return PixelRange(r);
 }
 
 auto createFencesNew(T, U)(Surface surface, T width, U height) {

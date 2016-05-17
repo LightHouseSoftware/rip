@@ -32,9 +32,8 @@ auto selectiveReplacing(Range)(Range r, RGBColor color, float detalizationLevel)
 		}
 	}
 
-	//auto range = map!(a => replacingProcedure(a, color))(r).array;
-	//return createPixels(range);
-	return r.map!(a => replacingProcedure(a, color));
+	auto range = map!(a => replacingProcedure(a, color))(r).array;
+	return createPixels(range);
 }
 
 
@@ -54,9 +53,8 @@ auto colorReplacing(Range)(Range r, RGBColor color, float detalizationLevel)
 		}
 	}
 
-	/*auto range = map!(a => replacingProcedure(a, color))(r).array;
-	return createPixels(range);*/
-	return r.map!(a => replacingProcedure(a, color));
+	auto range = map!(a => replacingProcedure(a, color))(r).array;
+	return createPixels(range);
 }
 
 // простая замена одного цвета другим
