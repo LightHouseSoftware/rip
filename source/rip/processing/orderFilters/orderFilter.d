@@ -20,7 +20,8 @@ public:
     bool        compare(RGBColor a, RGBColor b);
 
     auto    processFence(Range)(Range r) {
-        auto sorted = (r.array)
+        auto sorted =
+            r.array
             .sort!((a, b) => compare(a, b))
             .array;
 

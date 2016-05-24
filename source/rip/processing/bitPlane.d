@@ -52,12 +52,12 @@ enum BitOperation {
 auto cutBitPlane(Range) (Range range, Channel channel, ubyte bitIndex) {
     ubyte mask = getInvertBitMask!ubyte(bitIndex);
 
-    alias appMask = (in color) {
+	auto appMask(in RGBColor color) {
         ubyte value = cast(ubyte)channel.getValue(color);
         ubyte newValue = value & mask;
 
         return channel.injectValue(color, newValue);
-    };
+    }
 
     auto newRange = range
         .map!appMask;
@@ -68,7 +68,7 @@ auto cutBitPlane(Range) (Range range, Channel channel, ubyte bitIndex) {
 auto injectBitPlane(BitRange, PixelRange) (PixelRange pixels, BitRange bits,
     Channel channel, ubyte bitIndex) {
 
-    alias appMask = (pair) {
+    auto appMask(T)(T pair) {
 
         auto color = pair[1];
         ubyte channelValue = cast(ubyte)channel.getValue(color);
@@ -87,7 +87,7 @@ auto injectBitPlane(BitRange, PixelRange) (PixelRange pixels, BitRange bits,
         }
 
         return channel.injectValue(color, newValue);
-    };
+    }
 
     return zip(bits, pixels).map!appMask;
 }

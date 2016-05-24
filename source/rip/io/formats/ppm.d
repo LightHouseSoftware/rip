@@ -31,14 +31,16 @@ static final class P6Worker : FormatWorker!(Surface) {
 			//раскомментировать, когда ситуация с этим шаблоном разрешится
 			//mixin colorsToFile;
 
-			alias toFile = (in a) => file.write(
-				a.red!char,
-				a.green!char,
-				a.blue!char);
+			void toFile(in RGBColor a) {
+				file.write(
+					a.red!char,
+					a.green!char,
+					a.blue!char);
+			}
 
 			surface
 				.getPixels()
-					.each!toFile;
+				.each!toFile;
 
 			close();
 		}

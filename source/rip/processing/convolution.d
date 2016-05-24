@@ -18,21 +18,22 @@ auto elementaryConvolution(Signal, Filter)(Signal signal, Filter filter)
 
 	RGBColor result = new RGBColor(0, 0, 0);
 
-	// Функциональный литерал
-	alias conv = (pair) {
+	auto data = zip(signal, filter);
+	alias PairType = ElementType!(typeof(data));
+
+	auto conv = delegate(PairType pair) {
 		if(pair[1] != 0) {
 			if(pair[1] < 0)
 				result -= pair[0] * abs(pair[1]);
 
 			else if(pair[1] != 1)
 				result += pair[0] * pair[1];
-				
 			else
 				result += pair[0];
 		}
 	};
 
-	zip(signal, filter).each!conv;
+	data.each!conv;
 
 	return result;
 }
