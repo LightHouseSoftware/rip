@@ -1,9 +1,9 @@
 module rip.concepts.templates;
 
-private 
+private
 {
 	import std.meta : allSatisfy;
-	import std.range : zip;
+	import std.range;
 	import std.traits : isIntegral, isFloatingPoint, Unqual;
 
 	import rip.concepts.color;
@@ -22,6 +22,10 @@ template allArithmetic(T...)
 	enum bool allArithmetic = allSatisfy!(isNumberType, T);
 }
 
+template isPixelRange(Range)
+{
+	enum bool isPixelRange = is(ElementType!Range == RGBColor);
+}
 
 template addTypedGetter(string propertyVariableName, string propertyName)
 {
@@ -48,7 +52,7 @@ template addTypedGetter(string propertyVariableName, string propertyName)
 template addBinaryImageOperation(string operationSign, string operationName)
 {
 	import std.string : format;
-	
+
 	const char[] addBinaryImageOperation = format(
 		`auto %2$s(Surface lhs, Surface rhs)
 		{
@@ -68,7 +72,7 @@ template addBinaryImageOperation(string operationSign, string operationName)
 			}
 
 			return pixels.toSurface(
-				lhs.getWidth!ulong, 
+				lhs.getWidth!ulong,
 				lhs.getHeight!ulong
 			);
 		}`,

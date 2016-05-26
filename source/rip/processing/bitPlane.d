@@ -22,8 +22,9 @@ bool getBit(T) (T value, ubyte index) {
     return cast(bool)(value & getBitMask!T(index));
 }
 
-auto generateBitRange(PixelRange) (PixelRange pixels, Channel channel,
-                                    ubyte bitIndex) {
+auto generateBitRange(Range) (Range pixels, Channel channel, ubyte bitIndex)
+    if(isPixelRange!Range)
+{
     auto range = pixels
         .map!((a) => channel.getValue(a).getBit(bitIndex));
 
@@ -49,7 +50,9 @@ enum BitOperation {
     XOR = "^"
 }
 
-auto cutBitPlane(Range) (Range range, Channel channel, ubyte bitIndex) {
+auto cutBitPlane(Range) (Range range, Channel channel, ubyte bitIndex)
+    if(isPixelRange!Range)
+{
     ubyte mask = getInvertBitMask!ubyte(bitIndex);
 
 	auto appMask(in RGBColor color) {
@@ -66,7 +69,9 @@ auto cutBitPlane(Range) (Range range, Channel channel, ubyte bitIndex) {
 }
 
 auto injectBitPlane(BitRange, PixelRange) (PixelRange pixels, BitRange bits,
-    Channel channel, ubyte bitIndex) {
+                    Channel channel, ubyte bitIndex)
+    if(isPixelRange!PixelRange)
+{
 
     auto appMask(T)(T pair) {
 
