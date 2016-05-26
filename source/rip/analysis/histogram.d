@@ -25,13 +25,12 @@ struct Histogram {
 }
 
 Histogram takeHistogram(Range)(in Range pixelRange, Channel channel)
-//Проверка типа на InputRange
-//if(InputRange!Range)
+        if(isPixelRange!Range)
 {
     auto histogram = Histogram(channel);
 
     pixelRange
-        .getPixels()
+//        .getPixels()
         .each!(
             (color) => histogram[ channel.getIndex(color) ]++
         );

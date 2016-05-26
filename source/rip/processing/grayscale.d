@@ -18,7 +18,7 @@ enum GrayPalette
 }
 
 auto toGrayScale(Range)(Range r, GrayPalette palette = GrayPalette.STANDART)
-	//if (is(ElementType!Range == RGBColor))
+	if(isPixelRange!Range)
 {
 	RGBColor delegate(RGBColor) grayFunction;
 

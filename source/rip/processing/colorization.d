@@ -17,6 +17,7 @@ auto compareColors(RGBColor a, RGBColor b)
 
 // выборочная замена цвета (впоследстивие можно обобщить)
 auto selectiveReplacing(Range)(Range r, RGBColor color, float detalizationLevel)
+	if(isPixelRange!Range)
 {
 	// процедура замены цвета
 	auto replacingProcedure(RGBColor a, RGBColor b)
@@ -39,6 +40,7 @@ auto selectiveReplacing(Range)(Range r, RGBColor color, float detalizationLevel)
 
 // замена цвета на другой
 auto colorReplacing(Range)(Range r, RGBColor color, float detalizationLevel)
+	if(isPixelRange!Range)
 {
 	// процедура замены цвета
 	auto replacingProcedure(RGBColor a, RGBColor b)

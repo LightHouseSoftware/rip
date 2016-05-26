@@ -10,7 +10,7 @@ private
 }
 
 auto roughPixels(Range, T)(Range r, T numberOfColor)
-	//if (is(ElementType!Range == RGBColor))
+	if (isPixelRange!Range)
 {
 	auto N = cast(ushort) abs(numberOfColor);
 	RGBColor delegate(RGBColor) roughFunction = delegate(RGBColor color)
