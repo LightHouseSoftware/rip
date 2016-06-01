@@ -49,7 +49,7 @@ class RGBColor
 	{
 		setChannels(red, green, blue);
 	}
-
+	
 	// Красная компонента цвета
 	mixin(addTypedGetter!("R", "red"));
 
@@ -62,6 +62,24 @@ class RGBColor
 	// Интенсивность цвета для человеческого глаза
 	mixin(addTypedGetter!("0.3f * R + 0.59f * G + 0.11f * B", "luminance"));
 
+	// Изменение красной компоненты
+	void setRed(T)(T red)
+	{
+		setChannels(red, G, B);
+	}
+	
+	// Изменение зеленой компоненты
+	void setGreen(T)(T green)
+	{
+		setChannels(R, green, B);
+	}
+	
+	// Изменение синей компоненты
+	void setBlue(T)(T blue)
+	{
+		setChannels(R, G, blue);
+	}
+	
 	// Расстояние между двумя цветами в пространстве RGB
 	T distance(T)(RGBColor rhs)
 	{
@@ -188,7 +206,7 @@ class RGBColor
 	}
 
 	// Строковое представление цвета
-	string toString()
+	override string toString()
 	{
 		return format("RGBColor(%d, %d, %d)", R, G, B);
 	}
