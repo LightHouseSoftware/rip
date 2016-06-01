@@ -45,7 +45,7 @@ class Equation
 	void setA(T)(T a)
 		if (allArithmetic!T)
 	{
-		this.a = cast(float) x;
+		this.a = cast(float) a;
 	}
 
 	// Установить коэффициент b
