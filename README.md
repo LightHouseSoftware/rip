@@ -26,8 +26,11 @@ GPLv3
    *  analysis
       *  operations with histogram
    *  concepts
-      *  surface
+      *  surface (generalized image type)
+      *  surfaces addition, subtraction, multiplication and other arithmetic operations
+      *  gamma correction and inverting of image
       *  color
+      *  color arithmetic
       *  generation RGBColor from others color formats
       *  useful math functions
       *  ranges
@@ -39,6 +42,7 @@ GPLv3
       *  drawing math funcs
       *  drawing primitives
       *  turtle
+      *  another interest graphical procedures
    *   transforms(rip.dsp)
       *  Haar's
       *  Hadamard's
