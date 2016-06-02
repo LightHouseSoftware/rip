@@ -12,6 +12,7 @@ GPLv3
       * TGA(based on dlib, only loading)
       * BMP(based on dlib, only loading)
       * PNG(based on dlib, loading/saving)
+      * simple and convenient intermediate format (PPM P6)
       * PPM(loading/saving)
       * PAM(loading savind)
    * processing
@@ -28,6 +29,7 @@ GPLv3
    *  concepts
       *  surface (generalized image type)
       *  surfaces addition, subtraction, multiplication and other arithmetic operations
+      *  logical operation with surfaces
       *  gamma correction and inverting of image
       *  color
       *  color arithmetic
