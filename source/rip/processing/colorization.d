@@ -6,6 +6,7 @@ private
 	import std.range;
 
 	import rip.concepts.ranges;
+	import rip.concepts.templates;
 	import rip.concepts.color;
 	import rip.concepts.surface;
 }
