@@ -5,10 +5,12 @@ private
 	import std.algorithm;
 	import std.stdio;
 	import std.range;
+	import core.memory;
 
 	import rip.concepts.color;
 	import rip.concepts.surface;
 	import rip.concepts.templates;
+	import rip.concepts.destination;
 }
 
 Surface toSurface(Range)(Range r, size_t width, size_t height)
@@ -21,6 +23,32 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 	foreach(i; 0..s) {
 		surface[i] = r.front;
 		r.popFront();
+	}
+
+	return surface;
+}
+
+Surface toSurface(Range) (Range range, Surface surface) {
+	Surface destSurface;
+
+	//выбирает целевую поверхность
+	if(destination == Destination.New)
+		destSurface = new Surface(surface.getWidth!uint, surface.getHeight!uint);
+	else if(destination == Destination.Source) {
+		destSurface = surface;
+	}
+
+	auto area = surface.getArea!uint;
+
+	foreach(i; 0..area) {
+		auto pixel = range.front;
+		GC.free(cast(void*)surface[i]);
+		surface[i] = pixel;
+		//вариант выше потребляет меньше памяти, ибо удаляет пиксели
+		//из поверхности и заменяет их результатом операции
+
+		//surface[i] = range.front;
+		range.popFront();
 	}
 
 	return surface;
@@ -120,6 +148,10 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 
 			bool empty() {
 				return processedIndex == width * height;
+			}
+
+			auto base() {
+				return surface[x, y];
 			}
 		}
 
