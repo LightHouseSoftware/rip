@@ -19,10 +19,10 @@ class Negative {
 	RGBColor 	tmp = new RGBColor(0, 0, 0);
 
 	RGBColor 	getNewColor(RGBColor a) {
-		auto base - a;;
+		return base - a;
 	}
 
-	void 		refColor(RGBColor a) {
+	void 		refColor(ref RGBColor a) {
 		/*tmp.clear;
 		tmp += a;
 
@@ -37,7 +37,7 @@ class Negative {
 	}
 }
 
-auto toNegative(Range)(Range r, RGBColor color = new RGBColor(255, 255, 255))
+/*auto toNegative(Range)(Range r, RGBColor color = new RGBColor(255, 255, 255))
 	if(isPixelRange!Range)
 {
 	auto range = map!(a => color - a)(r).array;
@@ -75,4 +75,4 @@ auto toNegativeNew(Surface surface, RGBColor color = new RGBColor(255, 255, 255)
 			//новая версия сама создаст новую из параметров старой
 			.toSurface(surface);
 	return image;
-}
+}*/

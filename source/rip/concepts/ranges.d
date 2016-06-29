@@ -29,7 +29,7 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 }
 
 Surface toSurface(Range) (Range range, Surface surface) {
-	return range.toSurface(surface.getWidth!size_t, surface.getHeight!size_t);
+	return range.toSurface(surface.getWidth!uint, surface.getHeight!uint);
 }
 
 auto createPixels(Range)(Range r)
@@ -159,6 +159,13 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 				return processedIndex == surface.getArea!int;
 			}
 
+			auto length() {
+				return surface.getArea!uint - processedIndex;
+			}
+
+			auto save() {
+				return this;
+			}
 		}
 
 		return FenceRange(surface);

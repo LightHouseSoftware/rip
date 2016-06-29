@@ -18,7 +18,40 @@ enum GrayPalette
 	AVERAGE
 }
 
-auto toGrayScale(Range)(Range r, GrayPalette palette = GrayPalette.STANDART)
+class Grayscale {
+	GrayPalette palette;
+
+	RGBColor getNewColor(RGBColor a) {
+		float intensity;
+
+		final switch (palette) with (GrayPalette)
+		{
+			case STANDART:
+				intensity = 0.2126 * a.red!float + 0.7152 * a.green!float + 0.0722 * a.blue!float;
+			break;
+
+			case LUMINANCE:
+				intensity = a.luminance!float;
+			break;
+
+			case AVERAGE:
+				intensity = (a.red!float + a.green!float + a.blue!float) / 3.0;
+			break;
+
+		}
+		return new RGBColor(intensity, intensity, intensity);
+	}
+
+	void 	refColor(ref RGBColor a) {
+		a = null;
+	}
+
+	this(GrayPalette palette) {
+		this.palette = palette;
+	}
+}
+
+/*auto toGrayScale(Range)(Range r, GrayPalette palette = GrayPalette.STANDART)
 	if(isPixelRange!Range)
 {
 	RGBColor delegate(RGBColor) grayFunction;
@@ -48,9 +81,9 @@ auto toGrayScale(Range)(Range r, GrayPalette palette = GrayPalette.STANDART)
 	}
 	auto range = map!(a => grayFunction(a))(r).array;
 	return createPixels(range);
-}
+}*/
 
-auto toGrayScale(Surface surface, GrayPalette palette = GrayPalette.STANDART)
+/*auto toGrayScale(Surface surface, GrayPalette palette = GrayPalette.STANDART)
 {
 	auto image = surface
 		.createFences(1,1)
@@ -58,4 +91,4 @@ auto toGrayScale(Surface surface, GrayPalette palette = GrayPalette.STANDART)
 			.toGrayScale(palette)
 			.toSurface(surface.getWidth!int, surface.getHeight!int);
 	return image;
-}
+}*/
