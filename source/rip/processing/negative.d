@@ -14,6 +14,29 @@ private
 	import rip.concepts.destination;
 }
 
+class Negative {
+	RGBColor	base = new RGBColor(255, 255, 255);
+	RGBColor 	tmp = new RGBColor(0, 0, 0);
+
+	RGBColor 	getNewColor(RGBColor a) {
+		auto base - a;;
+	}
+
+	void 		refColor(RGBColor a) {
+		/*tmp.clear;
+		tmp += a;
+
+		a.clear;
+		a += base;
+		a -= tmp;*/
+		base -= a;
+		a.copy(base);
+		base.setRed(255);
+		base.setGreen(255);
+		base.setBlue(255);
+	}
+}
+
 auto toNegative(Range)(Range r, RGBColor color = new RGBColor(255, 255, 255))
 	if(isPixelRange!Range)
 {

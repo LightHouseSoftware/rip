@@ -43,13 +43,19 @@ class RGBColor
 		}
 	}
 
+	void copy(RGBColor color) {
+		this.R = color.R;
+		this.G = color.G;
+		this.B = color.B;
+	}
+
 	// Параметризованный конструктор для облегчения работы с любым арифметическим типом
 	this(T, U, V)(T red, U green, V blue)
 		if (allArithmetic!(T, U, V))
 	{
 		setChannels(red, green, blue);
 	}
-	
+
 	// Красная компонента цвета
 	mixin(addTypedGetter!("R", "red"));
 
@@ -67,19 +73,19 @@ class RGBColor
 	{
 		setChannels(red, G, B);
 	}
-	
+
 	// Изменение зеленой компоненты
 	void setGreen(T)(T green)
 	{
 		setChannels(R, green, B);
 	}
-	
+
 	// Изменение синей компоненты
 	void setBlue(T)(T blue)
 	{
 		setChannels(R, G, blue);
 	}
-	
+
 	// Расстояние между двумя цветами в пространстве RGB
 	T distance(T)(RGBColor rhs)
 	{
@@ -129,7 +135,7 @@ class RGBColor
 		if (allArithmetic!T)
 	{
 		RGBColor result;
-		
+
 		static if (isGeneralOperation(op))
 		{
 			mixin("result = new RGBColor(" ~
@@ -146,7 +152,7 @@ class RGBColor
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
 				);
 		}
-		
+
 		return result;
 	}
 
@@ -155,7 +161,7 @@ class RGBColor
 		if (allArithmetic!T)
 	{
 		RGBColor result;
-		
+
 		static if (isGeneralOperation(op))
 		{
 			mixin("result = new RGBColor(" ~
@@ -172,7 +178,7 @@ class RGBColor
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
 				);
 		}
-		
+
 		return result;
 	}
 
@@ -195,7 +201,7 @@ class RGBColor
 		auto red = (R == 0) ? 0 : log(this.red!float / 255.0) / log(cast(float) base);
 		auto green = (G == 0) ? 0 : log(this.green!float / 255.0) / log(cast(float) base);
 		auto blue = (B == 0) ? 0 : log(this.blue!float / 255.0) / log(cast(float) base);
-		
+
 		return new RGBColor(red * 255.0, green * 255.0, blue * 255.0);
 	}
 

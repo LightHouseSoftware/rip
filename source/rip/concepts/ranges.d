@@ -29,29 +29,7 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 }
 
 Surface toSurface(Range) (Range range, Surface surface) {
-	Surface destSurface;
-
-	//выбирает целевую поверхность
-	if(destination == Destination.New)
-		destSurface = new Surface(surface.getWidth!uint, surface.getHeight!uint);
-	else if(destination == Destination.Source) {
-		destSurface = surface;
-	}
-
-	auto area = surface.getArea!uint;
-
-	foreach(i; 0..area) {
-		auto pixel = range.front;
-		GC.free(cast(void*)surface[i]);
-		surface[i] = pixel;
-		//вариант выше потребляет меньше памяти, ибо удаляет пиксели
-		//из поверхности и заменяет их результатом операции
-
-		//surface[i] = range.front;
-		range.popFront();
-	}
-
-	return surface;
+	return range.toSurface(surface.getWidth!size_t, surface.getHeight!size_t);
 }
 
 auto createPixels(Range)(Range r)
@@ -180,6 +158,7 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 			bool empty() {
 				return processedIndex == surface.getArea!int;
 			}
+
 		}
 
 		return FenceRange(surface);
