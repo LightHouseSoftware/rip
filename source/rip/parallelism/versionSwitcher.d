@@ -1,7 +1,10 @@
 module rip.parallelism.versionSwitcher;
 
-import std.algorithm;
-import rip.parallelism.pmap;
+private {
+    import std.algorithm;
+    
+    import rip.parallelism.pmap;
+}
 
 //version = Parallel;
 

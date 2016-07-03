@@ -1,8 +1,10 @@
 module rip.parallelism.pmap;
 
-import std.algorithm;
-import std.parallelism;
-import std.range;
+private {
+	import std.algorithm;
+	import std.parallelism;
+	import std.range;
+}
 
 template pmap(fun...) {
 	auto pmap(Range) (Range inputRange) {
