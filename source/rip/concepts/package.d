@@ -6,4 +6,6 @@ public {
 	import rip.concepts.ranges;
 	import rip.concepts.surface;
 	import rip.concepts.templates;
+	import rip.concepts.channel;
+	import rip.concepts.makers;
 }
