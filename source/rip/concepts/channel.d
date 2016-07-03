@@ -1,6 +1,4 @@
 module rip.concepts.channel;
-//пересмотреть концепт каналов, и в случае введения в проект,
-//перенести его в concepts.
 
 private {
     import std.algorithm;
