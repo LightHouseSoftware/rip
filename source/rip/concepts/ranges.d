@@ -12,7 +12,7 @@ private
 }
 
 Surface toSurface(Range)(Range r, size_t width, size_t height)
-	if (is(ElementType!Range == RGBColor))
+	if (isPixelRange!Range)
 {
 	Surface surface = new Surface(width, height);
 
