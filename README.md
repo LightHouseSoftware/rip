@@ -71,7 +71,7 @@ If you have advices, please, create Issue. You can help us!
 
 ## Documentation
 
-    Documantaion available only for package "concepts" on site
+    Documentaion available only for package "concepts" on site
 
     http://lighthousesoftware.github.io/rip
 
