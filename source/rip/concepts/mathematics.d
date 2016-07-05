@@ -11,6 +11,7 @@ private
 }
 
 // Касинус
+/++ +/
 T cas(T)(T x)
 	if (allArithmetic!T)
 {
@@ -20,6 +21,7 @@ T cas(T)(T x)
 
 
 // Ненормированный кардинальный синус
+/++ +/
 T sinc(T)(T x)
 	if (allArithmetic!T)
 {
@@ -36,6 +38,7 @@ T sinc(T)(T x)
 }
 
 // Нгормированный кардинальный синус
+/++ +/
 T normalizedSinc(T)(T x)
 	if (allArithmetic!T)
 {
@@ -51,6 +54,7 @@ T normalizedSinc(T)(T x)
 	}
 }
 
+/++ +/
 T degreesInRadians(T)(T x)
 	if (allArithmetic!T)
 {
@@ -58,6 +62,7 @@ T degreesInRadians(T)(T x)
 	return x * DEGREE_IN_RADIANS;
 }
 
+/++ +/
 T radiansInDegrees(T)(T x)
 	if (allArithmetic!T)
 {

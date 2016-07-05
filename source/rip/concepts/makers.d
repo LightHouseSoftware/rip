@@ -8,6 +8,10 @@ protected {
     import rip.concepts.color;
 }
 
+/++
+    Funcs for translating color formats to RGBColor
++/
+
 RGBColor    makeHSV(in float h, lazy float s, lazy float v)
 in {
     if(!isNaN(h)) {
@@ -65,6 +69,7 @@ body {
     assert(0);
 }
 
+/++ ditto +/
 //Две практически одинаковые ф-ции в модуле. Надо
 //подумать об их объединении
 RGBColor    makeHSL(in float h, lazy float s, lazy float l)
@@ -124,6 +129,7 @@ body {
     assert(0);
 }
 
+/++ ditto +/
 RGBColor makeCMYK(in float c, in float m, in float y, in float k)
 in {
     assert(c >= 0 && c <= 1,
@@ -142,6 +148,7 @@ body {
         round(255 * (1 - y) * (1 - k)));
 }
 
+/++ ditto +/
 RGBColor makeXYZ(float x, float y, float z)
 in {
     assert(x >= 0 && x <= 95.047f,
@@ -167,6 +174,7 @@ body {
     return new RGBColor(r * 255.0f, g * 255.0f, b * 255.0f);
 }
 
+/++ ditto +/
 RGBColor makeLAB(float l, float a, float b)
 in {}
 body {

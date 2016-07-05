@@ -7,13 +7,20 @@ private {
     import rip.concepts.color;
 }
 
+/++
+    Class for working with colors on channel level
++/
 class Channel {
     float[2]            range;
+
+    /++ +/
     uint                function(in RGBColor color) getValue;
 
+    /++ +/
     RGBColor            function(   in RGBColor color,
                                     in float value) injectValue;
 
+    /++ +/
     this(   float rangeMin, float rangeMax,
             uint function(in RGBColor color) func,
             RGBColor function(in RGBColor color, in float value) colorFunc){
@@ -24,13 +31,17 @@ class Channel {
         injectValue = colorFunc;
     }
 
+    /++ +/
     T getRangeSize(T)() const {
         return cast(T)round(range[1] - range[0] + 1);
     }
 }
 
+/++
++/
 enum DefaultChannels {
 
+    /++ +/
     Red = new Channel(
         0.0f, 255.0f,
         (in color) => color.red!int,
@@ -40,6 +51,7 @@ enum DefaultChannels {
                 color.blue!ubyte)
     ),
 
+    /++ +/
     Green = new Channel(
         0.0f, 255.0f,
         (in color) => color.green!int,
@@ -49,6 +61,7 @@ enum DefaultChannels {
                 color.blue!ubyte)
     ),
 
+    /++ +/
     Blue = new Channel(
         0.0f, 255.0f,
         (in color) => color.blue!int,
@@ -58,6 +71,7 @@ enum DefaultChannels {
                 value)
     ),
 
+    /++ +/
     Grayscale = new Channel(
         0.0f, 255.0f,
         //так-как для построении гистограммы требуется черно-белое изображение,

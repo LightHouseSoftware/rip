@@ -13,8 +13,10 @@ private
 	import rip.concepts.templates;
 }
 
-// Универсальный тип для любых изображений
-class Surface  { 
+/++
++  	Digital mplementation of images.
++/
+class Surface  {
 	private
 	{
 		RGBColor[] pixels;
@@ -42,7 +44,12 @@ class Surface  {
 		}
 	}
 
-	// Параметризованный конструктор
+	/++
+	+   Params:
+	+     width =   	width of image
+	+     height =      height of image
+	+	  rgbColor =    main color
+	+/
 	this(T, U)(T width, U height, RGBColor rgbColor = new RGBColor(0, 0, 0))
 		if (allArithmetic!(T, U))
 	{
@@ -55,10 +62,9 @@ class Surface  {
 		pixels = map!(a => rgbColor)(iota(width * height)).array;
 	}
 
-	// Длина изображения в пикселах
+	/++ Parametrized getter +/
 	mixin(addTypedGetter!("width", "getWidth"));
 
-	// Ширина изображения в пикселах
 	mixin(addTypedGetter!("height", "getHeight"));
 
 	// Общее количество пикселей в изображении
@@ -66,7 +72,10 @@ class Surface  {
 
 	@property
 	{
-		// Изменяемая копия изображения
+		/++
+		+   Returns:
+		+     duplicate of surface
+		+/
 		Surface dup()
 		{
 			auto duplicateImage = new Surface(width, height);
@@ -82,45 +91,105 @@ class Surface  {
 			return duplicateImage;
 		}
 
-		// Неизменяемая копия изображения
+		/++
+		+   Returns:
+		+     immutable duplicate of surface
+		+/
 		immutable(Surface) idup()
 		{
 			return cast(immutable) this.dup;
 		}
 	}
 
-	// Обращение к пикселу с помощью одного индекса
+	/++
+	+	Params:
+	+		i 	= index of pixel
+	+   Returns:
+	+     	pixel
+	+	Example:
+	+	-----------------
+	+	Surface sur = new Surface[10, 10];
+	+	RGBColor pixel = sur[45];
+	+	-----------------
+	+/
 	RGBColor opIndex(T)(T i)
 		if (allArithmetic!T)
 	{
 		return pixels[calculateRealIndex(i)];
 	}
 
-	// Обращение к пикселу с помощью двух индексов
+	/++
+	+	Like opIndex. For two indexes
+	+	Params:
+	+		i 	= first index of pixel
+	+		j 	= second index of pixel
+	+   Returns:
+	+     	Pixel
+	+	Example:
+	+	-----------------
+	+	Surface sur = new Surface[10, 10];
+	+	RGBColor pixel = sur[4, 6];
+	+	----------------
+	+/
 	RGBColor opIndex(T, U)(T i, U j)
 		if (allArithmetic!(T, U))
 	{
 		return pixels[calculateRealIndex(i, j)];
 	}
 
-	// Присвоение пикселу значения
+	/++
+	+	Params:
+	+		rgbColor 	= new color of pixel
+	+		i 	= first index of pixel
+	+		j 	= second index of pixel
+	+   Returns:
+	+     	Pixel
+	+	Example:
+	+	-----------------
+	+	Surface sur = new Surface[10, 10];
+	+	sur[45] = new RGBColor(0, 45, 65);
+	+	-----------------
+	+/
 	void opIndexAssign(T)(RGBColor rgbColor, T i)
 		if (allArithmetic!T)
 	{
 		pixels[calculateRealIndex(i)] = rgbColor;
 	}
 
-	// То же самое, но в случае двумерных индексов
+	/++
+	+	Like opIndexAssign. For two indexes.
+	+	Params:
+	+		rgbColor 	= new color of pixel
+	+		i 	= first index of pixel
+	+		j 	= second index of pixel
+	+   Returns:
+	+     	Pixel
+	+	Example:
+	+	-----------------
+	+	Surface sur = new Surface[10, 10];
+	+	sur[4, 5] = new RGBColor(0, 45, 65);
+	+	-----------------
+	+/
 	void opIndexAssign(T, U)(RGBColor rgbColor, T i, U j)
 		if (allArithmetic!(T, U))
 	{
 		pixels[calculateRealIndex(i, j)] = rgbColor;
 	}
 
+
+	/++
+	+ 	Create pixel's range and return it;
+	+   Returns:
+	+     	PixelsRange
+	+/
 	auto getPixelsRange() {
 		return createPixels(pixels);
 	}
 
+	/++
+	+   Returns:
+	+     	Array of pixels
+	+/
 	auto getPixels() const {
 		return pixels;
 	}

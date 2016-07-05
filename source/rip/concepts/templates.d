@@ -10,6 +10,11 @@ private
 	import rip.concepts.surface;
 }
 
+/++
++  	Check all types for arithmetic types
++	Params:
++		T... 		=	types
++/
 template allArithmetic(T...)
 	if (T.length >= 1)
 {
@@ -22,11 +27,22 @@ template allArithmetic(T...)
 	enum bool allArithmetic = allSatisfy!(isNumberType, T);
 }
 
+/++
++  	Check range for RGBColor elements
++	Params:
++		Range 		=	range
++/
 template isPixelRange(Range)
 {
 	enum bool isPixelRange = is(ElementType!Range == RGBColor);
 }
 
+/++
++  	Creates getter function in compile-time
++	Params:
++		propertyVariableName 		=	name of variable
++		propertyName 				=	name of function
++/
 template addTypedGetter(string propertyVariableName, string propertyName)
 {
 	import std.string : format;
@@ -47,8 +63,12 @@ template addTypedGetter(string propertyVariableName, string propertyName)
 }
 
 
-// бинарные операции на целом изображении при условии, что аналогичные операции
-// определены для RGBColor
+/++
++  	Creates binary image operation in compile-time
++	Params:
++		operationSign 		=	...
++		operationName 		=	...
++/
 template addBinaryImageOperation(string operationSign, string operationName)
 {
 	import std.string : format;

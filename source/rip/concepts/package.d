@@ -1,3 +1,6 @@
+/++
+	This package contains main modules for library working.
++/
 module rip.concepts;
 
 public {

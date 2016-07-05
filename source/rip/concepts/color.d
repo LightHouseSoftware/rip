@@ -9,7 +9,9 @@ private
 	import rip.concepts.templates;
 }
 
-// Описание цвета пикселя
+/++
+	Digital implementation of RGB color format.
++/
 class RGBColor
 {
 	private
@@ -43,44 +45,59 @@ class RGBColor
 		}
 	}
 
-	// Параметризованный конструктор для облегчения работы с любым арифметическим типом
+	/++
+	+	Parametrized ctor for working with any arithmetic types
+	+   Params:
+	+     	red 		= red componemt
+	+    	green 		= green componemt
+	+	 	blue 		= blue componemt
+	+/
 	this(T, U, V)(T red, U green, V blue)
 		if (allArithmetic!(T, U, V))
 	{
 		setChannels(red, green, blue);
 	}
-	
-	// Красная компонента цвета
+
+	/++
+		Mixins for typed getter
+	+/
 	mixin(addTypedGetter!("R", "red"));
 
-	// Зеленая компонента цвета
+	/++ ditto +/
 	mixin(addTypedGetter!("G", "green"));
 
-	// Синяя компонента
+	/++ ditto +/
 	mixin(addTypedGetter!("B", "blue"));
 
-	// Интенсивность цвета для человеческого глаза
+	/++ ditto +/
 	mixin(addTypedGetter!("0.3f * R + 0.59f * G + 0.11f * B", "luminance"));
 
-	// Изменение красной компоненты
+	/++
+		Funcs for changing components of color
+	+/
 	void setRed(T)(T red)
 	{
 		setChannels(red, G, B);
 	}
-	
-	// Изменение зеленой компоненты
+
+	/++ ditto +/
 	void setGreen(T)(T green)
 	{
 		setChannels(R, green, B);
 	}
-	
-	// Изменение синей компоненты
+
+	/++ ditto +/
 	void setBlue(T)(T blue)
 	{
 		setChannels(R, G, blue);
 	}
-	
-	// Расстояние между двумя цветами в пространстве RGB
+
+	/++
+		Params:
+			rhs  	= second color
+		Returns:
+			Distance between two colors in RGB space
+	+/
 	T distance(T)(RGBColor rhs)
 	{
 		auto dRed = (this.red!float - rhs.red!float) ^^ 2;
@@ -90,7 +107,11 @@ class RGBColor
 		return sqrt(dRed + dGreen + dBlue);
 	}
 
-	// Арифметические операции для цветов
+	/++
+		Arithmetic operations for colors
+		Params:
+			rhs  	= second color
+	+/
 	RGBColor opBinary(string op)(auto ref RGBColor rhs)
 	{
 		RGBColor result;
@@ -115,7 +136,7 @@ class RGBColor
 		return result;
 	}
 
-	// Арифметические операции с левой стороныs
+	/++ ditto +/
 	void opOpAssign(string op)(auto ref RGBColor rhs)
 	{
 		mixin("setChannels(
@@ -124,12 +145,16 @@ class RGBColor
 			this.blue!float " ~ op ~" rhs.blue!float);");
 	}
 
-	// Арифметические операции между цветом и арифметическим скаляром
+	/++
+		Arithmetic operations between color and arithmetic types
+		Params:
+			rhs  	= variable
+	+/
 	RGBColor opBinary(string op, T)(auto ref T rhs)
 		if (allArithmetic!T)
 	{
 		RGBColor result;
-		
+
 		static if (isGeneralOperation(op))
 		{
 			mixin("result = new RGBColor(" ~
@@ -146,16 +171,16 @@ class RGBColor
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
 				);
 		}
-		
+
 		return result;
 	}
 
-	// Операции арифметики с правой стороны выражения
+	/++ ditto +/
 	RGBColor opBinaryRight(string op, T)(auto ref T rhs)
 		if (allArithmetic!T)
 	{
 		RGBColor result;
-		
+
 		static if (isGeneralOperation(op))
 		{
 			mixin("result = new RGBColor(" ~
@@ -172,11 +197,18 @@ class RGBColor
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
 				);
 		}
-		
+
 		return result;
 	}
 
-	// Гамма-коррекция
+	/++
+		Gamma correction
+		Params:
+			coefficient 		= ...
+			power 				= ...
+		Returns:
+			Corrected color
+	+/
 	RGBColor gamma(T, U)(T coefficient, U power)
 		if (allArithmetic!(T, U))
 	{
@@ -187,7 +219,13 @@ class RGBColor
 		return new RGBColor(red * 255.0, green * 255.0, blue * 255.0);
 	}
 
-	// Логарифмирование
+	/++
+		Logarithm of the color
+		Params:
+			base 	= base of logarithm
+		Returns:
+			New color - logarithm of the color
+	+/
 	RGBColor log(T)(T base = cast(T) 2)
 		if (allArithmetic!(T, U))
 	{
@@ -195,17 +233,21 @@ class RGBColor
 		auto red = (R == 0) ? 0 : log(this.red!float / 255.0) / log(cast(float) base);
 		auto green = (G == 0) ? 0 : log(this.green!float / 255.0) / log(cast(float) base);
 		auto blue = (B == 0) ? 0 : log(this.blue!float / 255.0) / log(cast(float) base);
-		
+
 		return new RGBColor(red * 255.0, green * 255.0, blue * 255.0);
 	}
 
-	// Инвертирование цвета ( в качестве базиса - белый цвет)
+	/++
+		Inversion
+		Returns:
+			New inverted color
+	+/
 	RGBColor invert()
 	{
 		return new RGBColor(255 - R, 255 - G, 255 - B);
 	}
 
-	// Строковое представление цвета
+	/++ +/
 	override string toString()
 	{
 		return format("RGBColor(%d, %d, %d)", R, G, B);

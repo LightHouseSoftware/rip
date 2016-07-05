@@ -11,6 +11,15 @@ private
 	import rip.concepts.templates;
 }
 
+/++
++  	Creates surface from input range of pixels
++	Params:
++		r  			= input range
++		width		= width of new surface
++		height		= height of new surface
++	Returns:
+		Created surface
++/
 Surface toSurface(Range)(Range r, size_t width, size_t height)
 	if (isPixelRange!Range)
 {
@@ -26,6 +35,13 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 	return surface;
 }
 
+/++
++  	Creates biderectional range from other range of pixels
++	Params:
++		r  			= input range
++	Returns:
+		Biderectional range
++/
 auto createPixels(Range)(Range r)
 {
 	struct PixelRange
@@ -75,14 +91,35 @@ auto createPixels(Range)(Range r)
 	return PixelRange(r);
 }
 
+/++
++  	Lazy and fast version of createFences.
++	P.S. FOR DETAILS SEE SOURCE
++	Params:
++		surface 		= input surface
++		width			= fence width
++		height			= fence height
++	Returns:
++		Biderectional range of pixels range[width * height]
++/
 auto createFencesNew(T, U)(Surface surface, T width, U height) {
 
+		/++
+		+  	Struct for calculation one fence
+		+/
 		struct Fence {
 			uint surfacePixelIndex;
 			uint processedIndex = 0;
 
 			uint x, y;
 			uint halfFenceWidth, halfFenceHeight;
+
+			/+
+			+	Calculate and return pixel
+			+	Params:
+			+		index 		= index of pixel
+			+	Returns:
+					RGBColor
+			+/
 
 			auto opIndex(uint index) {
 				uint h = cast(int)(index % width);
@@ -99,6 +136,14 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 				}
 			}
 
+			/+
+			+	Params:
+			+		surfacePixelIndex 		= index of main pixel for fence
+			+		halfFenceWidth 			= ...
+			+		halfFenceHeight 		= ...
+			+	Returns:
+			+		RGBColor
+			+/
 			this(	uint surfacePixelIndex,
 					uint halfFenceWidth, uint halfFenceHeight) {
 
@@ -109,6 +154,7 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 				x = surfacePixelIndex % surface.getWidth!uint;
 				y = surfacePixelIndex / surface.getWidth!uint;
 			}
+
 
 			auto front() {
 				return this.opIndex(processedIndex);
@@ -153,6 +199,16 @@ auto createFencesNew(T, U)(Surface surface, T width, U height) {
 		return FenceRange(surface);
 }
 
+/++
++  	Returns fences range from surface
++	P.S. FOR DETAILS SEE SOURCE
++	Params:
++		surface 		= input surface
++		width			= fence width
++		height			= fence height
++	Returns:
+		Biderectional range of pixels range[width * height]
++/
 auto createFences(T, U)(Surface surface, T width, U height)
 {
 	alias Range = typeof(createPixels([RGBColor.init]));
