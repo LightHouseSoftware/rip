@@ -1,0 +1,14 @@
+PROJECTNAME = RIP - Raster and Image Processor
+REFERENCETOP = ../index.html
+REPOSRCTREE = https://github.com/LightHouseSoftware/rip/tree/master/source
+TITLEBARTEXT = <a href="https://github.com/LightHouseSoftware/rip">Github Page</a>
+RESOURCEROOT = ./bootDoc/
+ISSUETRACKER = https://github.com/LightHouseSoftware/rip/issues/$1
+DEFAULTPACKAGE = rip
+PACKAGESEP = .
+FAVICON = $(RESOURCEROOT)assets/ico/favicon.ico
+LOGOSRC = $(RESOURCEROOT)assets/img/icon-github.png
+LOGOALT = $(PROJECTNAME)
+LOGOLINK = $(REFERENCETOP)
+COPYRIGHT = ImPureD, LightHouseSoftware
+COPYRIGHTFOOTER = &copy; $(COPYRIGHT) $(YEAR)

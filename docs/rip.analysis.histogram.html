@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<title>rip.analysis.histogram - RIP - Raster and Image Processor documentation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- styles -->
+	<link href="./bootDoc/assets/css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+		padding-top: 60px;
+		padding-bottom: 40px;
+		}
+		.sidebar-nav {
+		padding: 9px 0;
+		}
+	</style>
+	<link href="./bootDoc/assets/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="./bootDoc/bootdoc.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- fav and touch icons -->
+	<link rel="shortcut icon" href="./bootDoc/assets/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./bootDoc/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="./bootDoc/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="./bootDoc/assets/ico/apple-touch-icon-57-precomposed.png">
+	
+	<!-- Introduce DDoc settings required by JavaScript -->
+	<script type="text/javascript">
+		var Title = 'rip.analysis.histogram';
+		var SourceRepository = 'https://github.com/LightHouseSoftware/rip/tree/master/source';
+		var PackageSeparator = '.';
+	</script>
+	
+	<style type="text/css">
+		.ddoc-icon-variable { background-image: url('./bootDoc/ddoc-icons/var.png'); }
+		.ddoc-icon-function { background-image: url('./bootDoc/ddoc-icons/func.png'); }
+		.ddoc-icon-property { background-image: url('./bootDoc/ddoc-icons/property.png'); }
+		.ddoc-icon-struct { background-image: url('./bootDoc/ddoc-icons/struct.png'); }
+		.ddoc-icon-class { background-image: url('./bootDoc/ddoc-icons/class.png'); }
+		.ddoc-icon-enum { background-image: url('./bootDoc/ddoc-icons/enum.png'); }
+		.ddoc-icon-template { background-image: url('./bootDoc/ddoc-icons/template.png'); }
+	</style>
+	</head>
+
+	<body>
+	<!--
+	JavaScript reaps the module list from this element.
+	This is required for the MODULES macro to be reusable
+	in a noscript element later.
+	-->
+	<ul id="module-list-source" class="hidden">
+		
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.analysis.package.html" title="rip.analysis.package"><i class="icon-th"></i>rip.analysis.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.analysis.histogram.html" title="rip.analysis.histogram"><i class="icon-th"></i>rip.analysis.histogram</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.package.html" title="rip.concepts.package"><i class="icon-th"></i>rip.concepts.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.color.html" title="rip.concepts.color"><i class="icon-th"></i>rip.concepts.color</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.makers.html" title="rip.concepts.makers"><i class="icon-th"></i>rip.concepts.makers</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.mathematics.html" title="rip.concepts.mathematics"><i class="icon-th"></i>rip.concepts.mathematics</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.package.html" title="rip.concepts.package"><i class="icon-th"></i>rip.concepts.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.ranges.html" title="rip.concepts.ranges"><i class="icon-th"></i>rip.concepts.ranges</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.surface.html" title="rip.concepts.surface"><i class="icon-th"></i>rip.concepts.surface</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.templates.html" title="rip.concepts.templates"><i class="icon-th"></i>rip.concepts.templates</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.channel.html" title="rip.concepts.channel"><i class="icon-th"></i>rip.concepts.channel</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.package.html" title="rip.draw.package"><i class="icon-th"></i>rip.draw.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.additional.html" title="rip.draw.additional"><i class="icon-th"></i>rip.draw.additional</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.ifs.html" title="rip.draw.ifs"><i class="icon-th"></i>rip.draw.ifs</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.lsystem.html" title="rip.draw.lsystem"><i class="icon-th"></i>rip.draw.lsystem</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.mathgraphics.html" title="rip.draw.mathgraphics"><i class="icon-th"></i>rip.draw.mathgraphics</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.primitives.html" title="rip.draw.primitives"><i class="icon-th"></i>rip.draw.primitives</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.turtle.html" title="rip.draw.turtle"><i class="icon-th"></i>rip.draw.turtle</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.package.html" title="rip.io.package"><i class="icon-th"></i>rip.io.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.dlib.html" title="rip.io.dlib"><i class="icon-th"></i>rip.io.dlib</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.file.html" title="rip.io.file"><i class="icon-th"></i>rip.io.file</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.interfaces.html" title="rip.io.interfaces"><i class="icon-th"></i>rip.io.interfaces</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.formats.package.html" title="rip.io.formats.package"><i class="icon-th"></i>rip.io.formats.package</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.package.html" title="rip.parallelism.package"><i class="icon-th"></i>rip.parallelism.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.pmap.html" title="rip.parallelism.pmap"><i class="icon-th"></i>rip.parallelism.pmap</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.versionSwitcher.html" title="rip.parallelism.versionSwitcher"><i class="icon-th"></i>rip.parallelism.versionSwitcher</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.package.html" title="rip.processing.package"><i class="icon-th"></i>rip.processing.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.bitPlane.html" title="rip.processing.bitPlane"><i class="icon-th"></i>rip.processing.bitPlane</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.colorization.html" title="rip.processing.colorization"><i class="icon-th"></i>rip.processing.colorization</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.convolution.html" title="rip.processing.convolution"><i class="icon-th"></i>rip.processing.convolution</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.grayscale.html" title="rip.processing.grayscale"><i class="icon-th"></i>rip.processing.grayscale</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.negative.html" title="rip.processing.negative"><i class="icon-th"></i>rip.processing.negative</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.order.html" title="rip.processing.order"><i class="icon-th"></i>rip.processing.order</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.rough.html" title="rip.processing.rough"><i class="icon-th"></i>rip.processing.rough</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.filters.package.html" title="rip.processing.filters.package"><i class="icon-th"></i>rip.processing.filters.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.orderFilters.package.html" title="rip.processing.orderFilters.package"><i class="icon-th"></i>rip.processing.orderFilters.package</a></li>
+	</ul>
+	
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="../index.html">RIP - Raster and Image Processor</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="../index.html">Reference</a></li>
+					</ul>
+					
+					<form id="gotosymbol" class="navbar-search pull-left hidden">
+						<input type="text" class="search-query" placeholder="Go to symbol in rip.analysis.histogram" data-provide="typeahead" data-items="4">
+					</form>
+					
+					<p class="navbar-text pull-right"><a href="https://github.com/LightHouseSoftware/rip">Github Page</a></p>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+				<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li id="module-list" class="nav-header sidebar-list-entry">Modules<li>
+					<noscript>
+						
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.analysis.package.html" title="rip.analysis.package"><i class="icon-th"></i>rip.analysis.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.analysis.histogram.html" title="rip.analysis.histogram"><i class="icon-th"></i>rip.analysis.histogram</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.package.html" title="rip.concepts.package"><i class="icon-th"></i>rip.concepts.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.color.html" title="rip.concepts.color"><i class="icon-th"></i>rip.concepts.color</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.makers.html" title="rip.concepts.makers"><i class="icon-th"></i>rip.concepts.makers</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.mathematics.html" title="rip.concepts.mathematics"><i class="icon-th"></i>rip.concepts.mathematics</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.package.html" title="rip.concepts.package"><i class="icon-th"></i>rip.concepts.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.ranges.html" title="rip.concepts.ranges"><i class="icon-th"></i>rip.concepts.ranges</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.surface.html" title="rip.concepts.surface"><i class="icon-th"></i>rip.concepts.surface</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.templates.html" title="rip.concepts.templates"><i class="icon-th"></i>rip.concepts.templates</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.concepts.channel.html" title="rip.concepts.channel"><i class="icon-th"></i>rip.concepts.channel</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.package.html" title="rip.draw.package"><i class="icon-th"></i>rip.draw.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.additional.html" title="rip.draw.additional"><i class="icon-th"></i>rip.draw.additional</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.ifs.html" title="rip.draw.ifs"><i class="icon-th"></i>rip.draw.ifs</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.lsystem.html" title="rip.draw.lsystem"><i class="icon-th"></i>rip.draw.lsystem</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.mathgraphics.html" title="rip.draw.mathgraphics"><i class="icon-th"></i>rip.draw.mathgraphics</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.primitives.html" title="rip.draw.primitives"><i class="icon-th"></i>rip.draw.primitives</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.draw.turtle.html" title="rip.draw.turtle"><i class="icon-th"></i>rip.draw.turtle</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.package.html" title="rip.io.package"><i class="icon-th"></i>rip.io.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.dlib.html" title="rip.io.dlib"><i class="icon-th"></i>rip.io.dlib</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.file.html" title="rip.io.file"><i class="icon-th"></i>rip.io.file</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.interfaces.html" title="rip.io.interfaces"><i class="icon-th"></i>rip.io.interfaces</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.io.formats.package.html" title="rip.io.formats.package"><i class="icon-th"></i>rip.io.formats.package</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.package.html" title="rip.parallelism.package"><i class="icon-th"></i>rip.parallelism.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.pmap.html" title="rip.parallelism.pmap"><i class="icon-th"></i>rip.parallelism.pmap</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.parallelism.versionSwitcher.html" title="rip.parallelism.versionSwitcher"><i class="icon-th"></i>rip.parallelism.versionSwitcher</a></li>
+
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.package.html" title="rip.processing.package"><i class="icon-th"></i>rip.processing.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.bitPlane.html" title="rip.processing.bitPlane"><i class="icon-th"></i>rip.processing.bitPlane</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.colorization.html" title="rip.processing.colorization"><i class="icon-th"></i>rip.processing.colorization</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.convolution.html" title="rip.processing.convolution"><i class="icon-th"></i>rip.processing.convolution</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.grayscale.html" title="rip.processing.grayscale"><i class="icon-th"></i>rip.processing.grayscale</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.negative.html" title="rip.processing.negative"><i class="icon-th"></i>rip.processing.negative</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.order.html" title="rip.processing.order"><i class="icon-th"></i>rip.processing.order</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.rough.html" title="rip.processing.rough"><i class="icon-th"></i>rip.processing.rough</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.filters.package.html" title="rip.processing.filters.package"><i class="icon-th"></i>rip.processing.filters.package</a></li>
+	<li class="sidebar-list-entry tree-leaf"><a href="rip.processing.orderFilters.package.html" title="rip.processing.orderFilters.package"><i class="icon-th"></i>rip.processing.orderFilters.package</a></li>
+					</noscript>
+					<li id="symbol-list" class="nav-header sidebar-list-entry hidden">rip.analysis.histogram</li>
+				</ul>
+				</div><!--/.well -->
+			</div><!--/span-->
+			
+			<div class="span10">
+				<div class="row-fluid">
+					<div class="span11">
+						<ul id="module-breadcrumb" class="breadcrumb">
+							<noscript><h1>rip.analysis.histogram</h1></noscript>
+						</ul>
+						
+					</div>
+					<div class="span1 offset11">
+						<a href="../index.html"><img src="./bootDoc/assets/img/icon-github.png" alt="RIP - Raster and Image Processor"/></a>
+					</div>
+				</div>
+				<div id="declaration-list">
+					<br><br>
+
+				</div>
+				
+				<hr>
+				
+				<footer class="pull-left">
+					<p>Page generated with <a href="https://github.com/JakobOvrum/bootDoc">bootDoc</a>.</p>
+				</footer>
+				
+				<footer class="pull-right">
+					<p>&copy; ImPureD, LightHouseSoftware 2016</p>
+				</footer>
+			</div>
+		</div>
+	</div><!--/.fluid-container-->
+
+	<!-- Bootstrap javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="./bootDoc/assets/js/jquery.min.js"></script>
+	<script src="./bootDoc/assets/js/bootstrap.min.js"></script>
+	
+	<!-- bootDoc javascript
+	================================================== -->
+	<script src="./bootDoc/bootdoc.js"></script>
+	
+	</body>
+</html>
