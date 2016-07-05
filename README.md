@@ -7,7 +7,7 @@ RIP is a library for complex image processing.
 GPLv3
 
 ## Features
-   * I/O 
+   * I/O
       * JPEG(based on dlib, only loading)
       * TGA(based on dlib, only loading)
       * BMP(based on dlib, only loading)
@@ -59,14 +59,19 @@ The most funcs has their analogs for working with ranges.
    *  add 'vision' package for digital vision
    *  clean code
    *  optimize code
+   *  write documantation
 
 If you have advices, please, create Issue. You can help us!
 
-## Contributors 
+## Contributors
    ImPureD Team, LightHouse Software
-   
+
    *  Oleg Baharev (aka aquaratixc)
    *  Roman Vlasov
+
+## Documantation
+    Documantaion available only for package "concepts" on site
+    lighthousesoftware.github.io/rip
 
 ## How to use RIP?
 
@@ -74,7 +79,7 @@ Package in your `dub.json`:
 ```d
    {
       "dependencies": {
-        "rip": "~>0.0.2"
+        "rip": "~>0.0.3"
       }
    }
 ```
