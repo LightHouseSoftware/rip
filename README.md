@@ -69,9 +69,11 @@ If you have advices, please, create Issue. You can help us!
    *  Oleg Baharev (aka aquaratixc)
    *  Roman Vlasov
 
-## Documantation
+## Documentation
+
     Documantaion available only for package "concepts" on site
-    lighthousesoftware.github.io/rip
+
+    http://lighthousesoftware.github.io/rip
 
 ## How to use RIP?
 
