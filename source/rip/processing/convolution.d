@@ -65,7 +65,7 @@ auto elementaryConvolution(Signal, Filter)(Signal signal, Filter filter)
 }
 
 // Свертка сигнала с линейным фильтром
-auto convolution(Signal)(Signal signal, LinearFilter filter)
+deprecated auto convolution(Signal)(Signal signal, LinearFilter filter)
 {
 	// Выполнение свертки на одном фрагменте диапазона окрестностей
 	auto performConvolution(Signal)(Signal signal, LinearFilter filter)
@@ -77,7 +77,7 @@ auto convolution(Signal)(Signal signal, LinearFilter filter)
 	return convolutionRange;
 }
 
-auto convolve(Surface surface, LinearFilter filter)
+deprecated auto convolve(Surface surface, LinearFilter filter)
 {
 	auto image = surface
 		.createFences(filter.getWidth, filter.getHeight)
