@@ -67,7 +67,7 @@ static final class P6Worker : FormatWorker!(Surface) {
 					for (size_t j = 0; j < width; j++)
 					{
 
-						surface[j + i * width] = new RGBColor(
+						surface[j + i * width] = RGBColor.getColor(
 							buffer[j * 3],
 							buffer[j * 3 + 1],
 							buffer[j * 3 + 2]
