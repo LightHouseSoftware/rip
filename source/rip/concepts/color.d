@@ -7,13 +7,13 @@ private
 	import std.string;
 
 	import rip.concepts.templates;
+	import rip.rt.rgbCaching;
 }
 
-static this() {
-	manager = new RGBManager;
+//delete 
+version(RgbCachingOn) {
+	private alias manager = rgbManager;
 }
-
-RGBManager manager;
 
 /++
 	Digital implementation of RGB color format.
@@ -65,7 +65,11 @@ class RGBColor
 	}
 
 	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
-		return manager.getColor(red, green, blue);
+		version(RgbCachingOn) {
+			return manager.getColor(red, green, blue);
+		}
+		else
+			return new RGBColor(red, green, blue);
 	}
 
 	/++
@@ -263,8 +267,12 @@ class RGBColor
 		return format("RGBColor(%d, %d, %d)", R, G, B);
 	}
 
-	static int getCached() {
-		return manager.getCached;
+	version(RgbCachingOn) {
+
+		static int getCached() {
+			return manager.getCached;
+		}
+
 	}
 }
 
