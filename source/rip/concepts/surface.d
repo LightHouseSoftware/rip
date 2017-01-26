@@ -7,6 +7,7 @@ private
 	import std.range : array, iota, zip;
 	import std.stdio : File;
 	import std.string;
+	import std.array;
 
 	import rip.concepts.color;
 	import rip.concepts.ranges;
@@ -50,7 +51,7 @@ class Surface  {
 	+     height =      height of image
 	+	  rgbColor =    main color
 	+/
-	this(T, U)(T width, U height, RGBColor rgbColor = new RGBColor(0, 0, 0))
+	this(T, U)(T width, U height)
 		if (allArithmetic!(T, U))
 	{
 		assert(width > 0);
@@ -59,7 +60,11 @@ class Surface  {
 		this.width = width;
 		this.height = height;
 
-		pixels = map!(a => rgbColor)(iota(width * height)).array;
+		pixels = uninitializedArray!(RGBColor[])(width * height);
+	}
+
+	void initialize(RGBColor color = RGBColor.getColor(0, 0, 0)) {
+		pixels = map!(a => color)(iota(width * height)).array;
 	}
 
 	/++ Parametrized getter +/
@@ -193,7 +198,7 @@ class Surface  {
 	auto getPixels() const {
 		return pixels;
 	}
-};
+}
 
 
 // Сложение двух картинок
