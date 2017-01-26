@@ -72,6 +72,15 @@ class RGBColor
 			return new RGBColor(red, green, blue);
 	}
 
+	public static RGBColor getColor(RGBColor color) {
+		version(RgbCachingOn) {
+			return manager.getColor(color);
+		}
+		//USELESS
+		//else
+		//	return new RGBColor(red, green, blue);
+	}
+
 	/++
 		Mixins for typed getter
 	+/
