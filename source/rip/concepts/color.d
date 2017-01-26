@@ -132,18 +132,18 @@ class RGBColor
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = new RGBColor(" ~
-				"this.red!float " ~ op ~ " rhs.red!float," ~
-				"this.green!float " ~ op ~ " rhs.green!float," ~
-				"this.blue!float " ~ op ~ "rhs.blue!float," ~ ");"
+			mixin("result = RGBColor.getColor(" ~
+				"this.red!ubyte " ~ op ~ " rhs.red!ubyte," ~
+				"this.green!ubyte " ~ op ~ " rhs.green!ubyte," ~
+				"this.blue!ubyte " ~ op ~ "rhs.blue!ubyte" ~ ");"
 				);
 		}
 		else
 		{
-			mixin("result = new RGBColor(" ~
+			mixin("result = RGBColor.getColor(" ~
 				"this.red!long " ~ op ~ " rhs.red!long," ~
 				"this.green!long " ~ op ~ " rhs.green!long," ~
-				"this.blue!long " ~ op ~ "rhs.green!long," ~ ");"
+				"this.blue!long " ~ op ~ "rhs.green!long" ~ ");"
 				);
 		}
 
@@ -171,7 +171,7 @@ class RGBColor
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = new RGBColor(" ~
+			mixin("result = RGBColor.getColor(" ~
 				"this.red!float " ~ op ~ " cast(float) rhs," ~
 				"this.green!float " ~ op ~ " cast(float) rhs," ~
 				"this.blue!float " ~ op ~ " cast(float) rhs," ~ ");"
@@ -179,7 +179,7 @@ class RGBColor
 		}
 		else
 		{
-			mixin("result = new RGBColor(" ~
+			mixin("result = RGBColor.getColor(" ~
 				"this.red!long " ~ op ~ " cast(long) rhs," ~
 				"this.green!long " ~ op ~ " cast(long) rhs," ~
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
@@ -197,7 +197,7 @@ class RGBColor
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = new RGBColor(" ~
+			mixin("result = RGBColor.getColor(" ~
 				"this.red!float " ~ op ~ " cast(float) rhs," ~
 				"this.green!float " ~ op ~ " cast(float) rhs," ~
 				"this.blue!float " ~ op ~ " cast(float) rhs," ~ ");"
@@ -205,7 +205,7 @@ class RGBColor
 		}
 		else
 		{
-			mixin("result = new RGBColor(" ~
+			mixin("result = RGBColor.getColor(" ~
 				"this.red!long " ~ op ~ " cast(long) rhs," ~
 				"this.green!long " ~ op ~ " cast(long) rhs," ~
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
@@ -280,7 +280,7 @@ class RGBManager {
 	RGBColor[][][] cache;
 	int cached;
 
-	private bool initColorPlace(T, U, V)(T red, U green, V blue) {
+	private bool freeColorPlace(T, U, V)(T red, U green, V blue) {
 		if(cache.length == 0) {
 			cache.length = 256;
 		}
@@ -290,20 +290,48 @@ class RGBManager {
 		
 		if(cache[red][green].length == 0)
 			cache[red][green].length = 256;
+		
+		if(cache[red][green][blue] !is null)
+			return false;
 
 		return true;
 	}
 
-	public RGBColor getColor(T, U, V)(T red, U green, V blue) {
-		bool initialized = this.initColorPlace(red, green, blue);
+	public RGBColor getColor(T, U, V)(T _red, U _green, V _blue) {
+		ubyte red = cast(ubyte) clamp(_red, 0, 255);
+		ubyte green = cast(ubyte) clamp(_green, 0, 255);
+		ubyte blue = cast(ubyte) clamp(_blue, 0, 255);
 
-		if(cache[red][green][blue] is null) {
+		bool initialized = this.freeColorPlace(red, green, blue);
+
+		if(initialized) {
 			cache[red][green][blue] = new RGBColor(red, green, blue);
 			cached++;
 		}
 
 		return cache[red][green][blue];
 	}
+
+	public RGBColor getColor(RGBColor color) {
+		ubyte red = color.red!ubyte;
+		ubyte green = color.green!ubyte;
+		ubyte blue = color.blue!ubyte;
+
+		return this.getColor(red, green, blue);
+	}
+
+	// public bool putColor(RGBColor color) {
+	// 	ubyte red = color.red!ubyte;
+	// 	ubyte green = color.green!ubyte;
+	// 	ubyte blue = color.blue!ubyte;
+		
+	// 	if(freeColorPlace(red, green, blue)) {
+	// 		cache[red][green][blue] = new RGBColor(red, green, blue);
+	// 		return true;
+	// 	}
+	// 	else
+	// 		return false;
+	// }
 
 	public int getCached() {
 		return cached;
