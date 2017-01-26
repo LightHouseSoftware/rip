@@ -1,8 +1,5 @@
 module rip.rt.rgbCaching;
 
-//Uncomment for using
-//version = RgbCachingOn;
-
 version(RgbCachingOn) {
 
 import rip.concepts.color;
