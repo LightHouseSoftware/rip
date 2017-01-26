@@ -9,6 +9,12 @@ private
 	import rip.concepts.templates;
 }
 
+static this() {
+	manager = new RGBManager;
+}
+
+RGBManager manager;
+
 /++
 	Digital implementation of RGB color format.
 +/
@@ -56,6 +62,10 @@ class RGBColor
 		if (allArithmetic!(T, U, V))
 	{
 		setChannels(red, green, blue);
+	}
+
+	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
+		return manager.getColor(red, green, blue);
 	}
 
 	/++
@@ -252,4 +262,42 @@ class RGBColor
 	{
 		return format("RGBColor(%d, %d, %d)", R, G, B);
 	}
+
+	static int getCached() {
+		return manager.getCached;
+	}
+}
+
+class RGBManager {
+	RGBColor[][][] cache;
+	int cached;
+
+	private bool initColorPlace(T, U, V)(T red, U green, V blue) {
+		if(cache.length == 0) {
+			cache.length = 256;
+		}
+
+		if(cache[red].length == 0)
+			cache[red].length = 256;
+		
+		if(cache[red][green].length == 0)
+			cache[red][green].length = 256;
+
+		return true;
+	}
+
+	public RGBColor getColor(T, U, V)(T red, U green, V blue) {
+		bool initialized = this.initColorPlace(red, green, blue);
+
+		if(cache[red][green][blue] is null) {
+			cache[red][green][blue] = new RGBColor(red, green, blue);
+			cached++;
+		}
+
+		return cache[red][green][blue];
+	}
+
+	public int getCached() {
+		return cached;
+	} 
 }
