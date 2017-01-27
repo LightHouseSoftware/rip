@@ -2,6 +2,9 @@
 
 RIP is a library for complex image processing.
 
+<a href="https://code.dlang.org/packages/rip" title="Go to rip"><img src="https://img.shields.io/dub/v/rip.svg" alt="Dub version"></a> 
+<a href="https://code.dlang.org/packages/rip" title="Go to rip"><img src="https://img.shields.io/dub/dt/rip.svg" alt="Dub downloads"></a>
+
 ## License
 
 GPLv3
@@ -81,7 +84,7 @@ Package in your `dub.json`:
 ```d
    {
       "dependencies": {
-        "rip": "~>0.0.3"
+        "rip": "~>0.0.4"
       }
    }
 ```
