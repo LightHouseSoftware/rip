@@ -2,18 +2,14 @@ module rip.color.rgb;
 
 private
 {
-	import std.algorithm : clamp;
 	import std.math;
 	import std.string;
 
-	import rip.concepts.templates;
-	import rip.rt.rgbCaching;
 	import rip.color.color;
+	import rip.rt.rgbCaching;
+	import rip.concepts.templates;
 	import rip.utils.staticFuncs;
 }
-
-//Kill me
-public import rip.color.rgbManager;
 
 //delete 
 version(RgbCachingOn) {
