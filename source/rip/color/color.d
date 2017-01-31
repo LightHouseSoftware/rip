@@ -18,6 +18,15 @@ protected:
         return data[index];
     } 
 
+    auto getTypedByIndex(T = Type)(size_t index) const {
+        static if(is(T == Type)) {
+            return data[index];
+        }
+        else {
+             return cast(T) data[index];
+        }
+    }
+
 private:
     Type[N]     data;
 }

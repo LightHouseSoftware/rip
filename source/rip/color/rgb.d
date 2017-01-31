@@ -64,16 +64,16 @@ class RGB : Color!(ubyte, 3)
 			super[2] = value;
 		}
 
-		@property ubyte R() const {
-			return super[0];
+		@property auto R(T = ubyte) const {
+			return super.getTypedByIndex!T(0);
 		}
 
-		@property ubyte G() const {
-			return super[1];
+		@property auto G(T = ubyte) const {
+			return super.getTypedByIndex!T(1);
 		}
 
-		@property ubyte B() const {
-			return super[2];
+		@property auto B(T = ubyte) const {
+			return super.getTypedByIndex!T(2);
 		}
 	}
 
