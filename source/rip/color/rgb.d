@@ -8,6 +8,7 @@ private
 
 	import rip.concepts.templates;
 	import rip.rt.rgbCaching;
+	import rip.color.color;
 }
 
 //delete 
@@ -18,7 +19,7 @@ version(RgbCachingOn) {
 /++
 	Digital implementation of RGB color format.
 +/
-class RGBColor
+class RGBColor : Color!(ubyte, 3)
 {
 	private
 	{
@@ -37,7 +38,7 @@ class RGBColor
 
 	protected
 	{
-		ubyte[3] 	data;
+		//ubyte[3] 	data;
 
 		// Задание компонент цвета
 		void setChannels (T, U, V)(T red, U green, V blue)
@@ -49,27 +50,27 @@ class RGBColor
 		}
 
 		@property void R(ubyte value) {
-			data[0] = value;
+			super[0] = value;
 		}
 
 		@property void G(ubyte value) {
-			data[1] = value;
+			super[1] = value;
 		}
 
 		@property void B(ubyte value) {
-			data[2] = value;
+			super[2] = value;
 		}
 
 		@property ubyte R() const {
-			return data[0];
+			return super[0];
 		}
 
 		@property ubyte G() const {
-			return data[1];
+			return super[1];
 		}
 
 		@property ubyte B() const {
-			return data[2];
+			return super[2];
 		}
 	}
 
