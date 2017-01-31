@@ -4,6 +4,21 @@ import std.algorithm;
 
 class Color(Type, size_t N) {
 protected:
+    this() {}
+    this(T = Type) (T[] data...) {
+        setChannels(data);
+    }
+
+    void setChannels(T = Type) (T[] data...) {
+        static if(is(T == Type)) {
+            this.data = data;
+        }
+        else {
+            for(int i = 0; i < N; i++) {
+                this[i] = data[i];
+            }
+        }
+    }
 
     void opIndexAssign(T = Type)(T value, size_t index) {
         static if(is(T == Type)) {

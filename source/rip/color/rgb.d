@@ -41,16 +41,6 @@ class RGB : Color!(ubyte, 3)
 
 	protected
 	{
-		//ubyte[3] 	data;
-
-		// Задание компонент цвета
-		void setChannels (T, U, V)(T red, U green, V blue)
-			if (allArithmetic!(T, U, V))
-		{
-			this.R = red;
-			this.G = green;
-			this.B = blue;
-		}
 
 		@property void R(T)(T value) {
 			super[0] = value;
@@ -87,7 +77,7 @@ class RGB : Color!(ubyte, 3)
 	this(T, U, V)(T red, U green, V blue)
 		if (allArithmetic!(T, U, V))
 	{
-		setChannels(red, green, blue);
+		super(red, green, blue);
 	}
 
 	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
