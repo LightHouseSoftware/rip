@@ -35,6 +35,39 @@ Surface toSurface(Range)(Range r, size_t width, size_t height)
 	return surface;
 }
 
+auto createSurfaceRange(Surface surface) {
+	struct SurfaceRange {
+		Surface surface;
+		uint i;
+
+		this(Surface surface, uint i = 0) {
+			this.surface = surface;
+			this.i = i;
+		}
+
+		RGBColor front() {
+			return surface[i];
+		}
+
+		void popFront() {
+			i++;
+		}
+
+		bool empty() {
+			return i == surface.getArea!uint; 
+		}
+
+		auto length() {
+			return surface.getArea!size_t;
+		}
+
+		auto save() {
+			return SurfaceRange(surface, i);
+		}
+	}
+
+	return SurfaceRange(surface);
+}
 /++
 +  	Creates biderectional range from other range of pixels
 +	Params:
