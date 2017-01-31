@@ -65,26 +65,9 @@ auto elementaryConvolution(Signal, Filter)(Signal signal, Filter filter)
 }
 
 // Свертка сигнала с линейным фильтром
-deprecated auto convolution(Signal)(Signal signal, LinearFilter filter)
-{
-	// Выполнение свертки на одном фрагменте диапазона окрестностей
-	auto performConvolution(Signal)(Signal signal, LinearFilter filter)
-	{
-		return filter.getOffset + filter.getDivider * elementaryConvolution(signal, filter.getKernel);
-	}
+alias convolution = convolutionNew;
+alias convolve = convolveNew;
 
-	auto convolutionRange = map!(a => performConvolution(a, filter))(signal).array;
-	return convolutionRange;
-}
-
-deprecated auto convolve(Surface surface, LinearFilter filter)
-{
-	auto image = surface
-		.createFences(filter.getWidth, filter.getHeight)
-			.convolution(filter)
-			.toSurface(surface.getWidth!int, surface.getHeight!int);
-	return image;
-}
 
 auto convolutionNew(Signal)(Signal signal, LinearFilter filter)
 {
