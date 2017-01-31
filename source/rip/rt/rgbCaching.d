@@ -12,6 +12,18 @@ version(RgbCachingOn) {
         rgbManager = new RGBManager(false);
         pragma(msg, "rgbManager is initialized...");
     }
+}
 
+auto switchRgbCaching(T)(T args, bool value = true) {
+    useRgbCaching = value;
+    return args;
+} 
+
+void switchRgbCaching(bool value = true) {
+    useRgbCaching = value;
+} 
+
+shared {
+    bool useRgbCaching = false;
 }
 

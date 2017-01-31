@@ -58,23 +58,24 @@ class RGB : Color!(ubyte, 3)
 
 	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
 		version(RgbCachingOn) {
-			return rgbManager.getColor(red, green, blue);
+			if(useRgbCaching)
+				return rgbManager.getColor(red, green, blue);
 		}
-		else
-			return new RGBColor(red, green, blue);
+
+		return new RGBColor(red, green, blue);
 	}
 
 	public static RGBColor getColor(RGBColor color) {
 		version(RgbCachingOn) {
-			return rgbManager.getColor(color);
+			if(useRgbCaching)
+				return rgbManager.getColor(color);
 		}
-		//USELESS
-		else
+
 			return color;
 	}
 
 	/++
-		Mixins for typed getter
+	 	Mixins for typed getter
 	+/
 	mixin(addTypedGetter!("R", "red"));
 
