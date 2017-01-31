@@ -1,5 +1,6 @@
 {
 	"name": "rip",
+	"version": "0.0.5",
 	"description": "Raster and Image processor",
 	"copyright": "Copyright © 2016, Oleg Baharew, Roman Vlasov",
 	"license": "GPL-3.0",
@@ -8,6 +9,6 @@
 		"dlib": {
 			"version" : "*"
 		}
-	},
-	"versions" : ["RgbCachingOn"]
+	}
+	,"versions" : ["RgbCachingOn"]
 }

@@ -7,7 +7,7 @@ import rip.concepts.color;
 RGBManager rgbManager;
 
 static this() {
-    rgbManager = new RGBManager;
+    rgbManager = new RGBManager(false);
     pragma(msg, "rgbManager is initialized...");
 }
 

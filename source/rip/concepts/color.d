@@ -77,8 +77,8 @@ class RGBColor
 			return manager.getColor(color);
 		}
 		//USELESS
-		//else
-		//	return new RGBColor(red, green, blue);
+		else
+			return color;
 	}
 
 	/++
@@ -288,17 +288,34 @@ class RGBColor
 class RGBManager {
 	RGBColor[][][] cache;
 	int cached;
+	bool fullInitialization;
+
+	this(bool fullInitialization = false) {
+		cache.length = 256;
+
+		this.fullInitialization = fullInitialization;
+
+		if(fullInitialization)
+			initizalizeFullSpace();
+	}
+
+	void initizalizeFullSpace() {
+		foreach(ref _array; cache) {
+			_array.length = 256;
+			foreach(ref __array; _array) {
+				__array.length = 256;
+			}
+		}
+	}
 
 	private bool freeColorPlace(T, U, V)(T red, U green, V blue) {
-		if(cache.length == 0) {
-			cache.length = 256;
+		if(!fullInitialization) {
+			if(cache[red].length == 0)
+				cache[red].length = 256;
+			
+			if(cache[red][green].length == 0)
+				cache[red][green].length = 256;
 		}
-
-		if(cache[red].length == 0)
-			cache[red].length = 256;
-		
-		if(cache[red][green].length == 0)
-			cache[red][green].length = 256;
 		
 		if(cache[red][green][blue] !is null)
 			return false;
