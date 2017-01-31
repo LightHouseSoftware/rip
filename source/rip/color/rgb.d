@@ -9,6 +9,7 @@ private
 	import rip.concepts.templates;
 	import rip.rt.rgbCaching;
 	import rip.color.color;
+	import rip.utils.staticFuncs;
 }
 
 //Kill me
@@ -24,24 +25,8 @@ version(RgbCachingOn) {
 +/
 class RGB : Color!(ubyte, 3)
 {
-	private
-	{
-		// Является ли бинарная операция основной ?
-		static bool isGeneralOperation(string op)
-		{
-			switch (op)
-			{
-				case "+", "-", "*", "/", "%", "^^":
-					return true;
-				default:
-					return false;
-			}
-		}
-	}
-
 	protected
 	{
-
 		@property void R(T)(T value) {
 			super[0] = value;
 		}
