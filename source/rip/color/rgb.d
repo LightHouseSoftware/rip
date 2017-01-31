@@ -11,11 +11,6 @@ private
 	import rip.utils.staticFuncs;
 }
 
-//delete 
-version(RgbCachingOn) {
-	private alias manager = rgbManager;
-}
-
 /++
 	Digital implementation of RGB color format.
 +/
@@ -63,7 +58,7 @@ class RGB : Color!(ubyte, 3)
 
 	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
 		version(RgbCachingOn) {
-			return manager.getColor(red, green, blue);
+			return rgbManager.getColor(red, green, blue);
 		}
 		else
 			return new RGBColor(red, green, blue);
@@ -71,7 +66,7 @@ class RGB : Color!(ubyte, 3)
 
 	public static RGBColor getColor(RGBColor color) {
 		version(RgbCachingOn) {
-			return manager.getColor(color);
+			return rgbManager.getColor(color);
 		}
 		//USELESS
 		else
@@ -276,7 +271,7 @@ class RGB : Color!(ubyte, 3)
 	version(RgbCachingOn) {
 
 		static int getCached() {
-			return manager.getCached;
+			return rgbManager.getCached;
 		}
 
 	}
