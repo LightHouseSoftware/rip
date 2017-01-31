@@ -22,7 +22,7 @@ version(RgbCachingOn) {
 /++
 	Digital implementation of RGB color format.
 +/
-class RGBColor : Color!(ubyte, 3)
+class RGB : Color!(ubyte, 3)
 {
 	private
 	{
@@ -47,20 +47,20 @@ class RGBColor : Color!(ubyte, 3)
 		void setChannels (T, U, V)(T red, U green, V blue)
 			if (allArithmetic!(T, U, V))
 		{
-			this.R = cast(ubyte) clamp(red, 0, 255);
-			this.G = cast(ubyte) clamp(green, 0, 255);
-			this.B = cast(ubyte) clamp(blue, 0, 255);
+			this.R = red;
+			this.G = green;
+			this.B = blue;
 		}
 
-		@property void R(ubyte value) {
+		@property void R(T)(T value) {
 			super[0] = value;
 		}
 
-		@property void G(ubyte value) {
+		@property void G(T)(T value) {
 			super[1] = value;
 		}
 
-		@property void B(ubyte value) {
+		@property void B(T)(T value) {
 			super[2] = value;
 		}
 
@@ -310,3 +310,5 @@ class RGBColor : Color!(ubyte, 3)
 
 	}
 }
+
+alias RGBColor = RGB;
