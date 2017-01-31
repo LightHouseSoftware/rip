@@ -71,19 +71,15 @@ class RGB : Color!(ubyte, 3)
 				return rgbManager.getColor(color);
 		}
 
-			return color;
+		return color;
 	}
 
 	/++
 	 	Mixins for typed getter
 	+/
-	mixin(addTypedGetter!("R", "red"));
-
-	/++ ditto +/
-	mixin(addTypedGetter!("G", "green"));
-
-	/++ ditto +/
-	mixin(addTypedGetter!("B", "blue"));
+	alias red = R;
+	alias green = G;
+	alias blue = B;
 
 	/++ ditto +/
 	mixin(addTypedGetter!("0.3f * R + 0.59f * G + 0.11f * B", "luminance"));
@@ -91,22 +87,9 @@ class RGB : Color!(ubyte, 3)
 	/++
 		Funcs for changing components of color
 	+/
-	void setRed(T)(T red)
-	{
-		setChannels(red, G, B);
-	}
-
-	/++ ditto +/
-	void setGreen(T)(T green)
-	{
-		setChannels(R, green, B);
-	}
-
-	/++ ditto +/
-	void setBlue(T)(T blue)
-	{
-		setChannels(R, G, blue);
-	}
+	alias setRed = R;
+	alias setGreen = G;
+	alias setBlue = B;
 
 	/++
 		Params:
