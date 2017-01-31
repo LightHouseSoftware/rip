@@ -37,9 +37,7 @@ class RGBColor
 
 	protected
 	{
-		ubyte R;
-		ubyte G;
-		ubyte B;
+		ubyte[3] 	data;
 
 		// Задание компонент цвета
 		void setChannels (T, U, V)(T red, U green, V blue)
@@ -48,6 +46,30 @@ class RGBColor
 			this.R = cast(ubyte) clamp(red, 0, 255);
 			this.G = cast(ubyte) clamp(green, 0, 255);
 			this.B = cast(ubyte) clamp(blue, 0, 255);
+		}
+
+		@property void R(ubyte value) {
+			data[0] = value;
+		}
+
+		@property void G(ubyte value) {
+			data[1] = value;
+		}
+
+		@property void B(ubyte value) {
+			data[2] = value;
+		}
+
+		@property ubyte R() const {
+			return data[0];
+		}
+
+		@property ubyte G() const {
+			return data[1];
+		}
+
+		@property ubyte B() const {
+			return data[2];
 		}
 	}
 
