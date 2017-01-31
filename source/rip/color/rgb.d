@@ -56,16 +56,16 @@ class RGB : Color!(ubyte, 3)
 		super(red, green, blue);
 	}
 
-	public static RGBColor getColor(T, U, V)(T red, U green, V blue) {
+	public static RGB getColor(T, U, V)(T red, U green, V blue) {
 		version(RgbCachingOn) {
 			if(useRgbCaching)
 				return rgbManager.getColor(red, green, blue);
 		}
 
-		return new RGBColor(red, green, blue);
+		return RGB.getColor(red, green, blue);
 	}
 
-	public static RGBColor getColor(RGBColor color) {
+	public static RGB getColor(RGB color) {
 		version(RgbCachingOn) {
 			if(useRgbCaching)
 				return rgbManager.getColor(color);
@@ -97,7 +97,7 @@ class RGB : Color!(ubyte, 3)
 		Returns:
 			Distance between two colors in RGB space
 	+/
-	T distance(T)(RGBColor rhs)
+	T distance(T)(RGB rhs)
 	{
 		auto dRed = (this.red!float - rhs.red!float) ^^ 2;
 		auto dGreen = (this.green!float - rhs.green!float) ^^ 2;
@@ -111,13 +111,13 @@ class RGB : Color!(ubyte, 3)
 		Params:
 			rhs  	= second color
 	+/
-	RGBColor opBinary(string op)(auto ref RGBColor rhs)
+	RGB opBinary(string op)(auto ref RGB rhs)
 	{
-		RGBColor result;
+		RGB result;
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!ubyte " ~ op ~ " rhs.red!ubyte," ~
 				"this.green!ubyte " ~ op ~ " rhs.green!ubyte," ~
 				"this.blue!ubyte " ~ op ~ "rhs.blue!ubyte" ~ ");"
@@ -125,7 +125,7 @@ class RGB : Color!(ubyte, 3)
 		}
 		else
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!long " ~ op ~ " rhs.red!long," ~
 				"this.green!long " ~ op ~ " rhs.green!long," ~
 				"this.blue!long " ~ op ~ "rhs.green!long" ~ ");"
@@ -136,7 +136,7 @@ class RGB : Color!(ubyte, 3)
 	}
 
 	/++ ditto +/
-	void opOpAssign(string op)(auto ref RGBColor rhs)
+	void opOpAssign(string op)(auto ref RGB rhs)
 	{
 		mixin("setChannels(
 			this.red!float " ~ op ~" rhs.red!float,
@@ -149,14 +149,14 @@ class RGB : Color!(ubyte, 3)
 		Params:
 			rhs  	= variable
 	+/
-	RGBColor opBinary(string op, T)(auto ref T rhs)
+	RGB opBinary(string op, T)(auto ref T rhs)
 		if (allArithmetic!T)
 	{
-		RGBColor result;
+		RGB result;
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!float " ~ op ~ " cast(float) rhs," ~
 				"this.green!float " ~ op ~ " cast(float) rhs," ~
 				"this.blue!float " ~ op ~ " cast(float) rhs," ~ ");"
@@ -164,7 +164,7 @@ class RGB : Color!(ubyte, 3)
 		}
 		else
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!long " ~ op ~ " cast(long) rhs," ~
 				"this.green!long " ~ op ~ " cast(long) rhs," ~
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
@@ -175,14 +175,14 @@ class RGB : Color!(ubyte, 3)
 	}
 
 	/++ ditto +/
-	RGBColor opBinaryRight(string op, T)(auto ref T rhs)
+	RGB opBinaryRight(string op, T)(auto ref T rhs)
 		if (allArithmetic!T)
 	{
-		RGBColor result;
+		RGB result;
 
 		static if (isGeneralOperation(op))
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!float " ~ op ~ " cast(float) rhs," ~
 				"this.green!float " ~ op ~ " cast(float) rhs," ~
 				"this.blue!float " ~ op ~ " cast(float) rhs," ~ ");"
@@ -190,7 +190,7 @@ class RGB : Color!(ubyte, 3)
 		}
 		else
 		{
-			mixin("result = RGBColor.getColor(" ~
+			mixin("result = RGB.getColor(" ~
 				"this.red!long " ~ op ~ " cast(long) rhs," ~
 				"this.green!long " ~ op ~ " cast(long) rhs," ~
 				"this.blue!long " ~ op ~ "cast(long) rhs," ~ ");"
@@ -208,14 +208,14 @@ class RGB : Color!(ubyte, 3)
 		Returns:
 			Corrected color
 	+/
-	RGBColor gamma(T, U)(T coefficient, U power)
+	RGB gamma(T, U)(T coefficient, U power)
 		if (allArithmetic!(T, U))
 	{
 		auto red = cast(float) coefficient * ((this.red!float / 255.0) ^^ cast(float) power);
 		auto green = cast(float) coefficient * ((this.green!float / 255.0) ^^ cast(float) power);
 		auto blue = cast(float) coefficient * ((this.blue!float / 255.0) ^^ cast(float) power);
 
-		return new RGBColor(red * 255.0, green * 255.0, blue * 255.0);
+		return RGB.getColor(red * 255.0, green * 255.0, blue * 255.0);
 	}
 
 	/++
@@ -225,7 +225,7 @@ class RGB : Color!(ubyte, 3)
 		Returns:
 			New color - logarithm of the color
 	+/
-	RGBColor log(T)(T base = cast(T) 2)
+	RGB log(T)(T base = cast(T) 2)
 		if (allArithmetic!(T, U))
 	{
 		assert(base != 0);
@@ -233,7 +233,7 @@ class RGB : Color!(ubyte, 3)
 		auto green = (G == 0) ? 0 : log(this.green!float / 255.0) / log(cast(float) base);
 		auto blue = (B == 0) ? 0 : log(this.blue!float / 255.0) / log(cast(float) base);
 
-		return new RGBColor(red * 255.0, green * 255.0, blue * 255.0);
+		return RGB.getColor(red * 255.0, green * 255.0, blue * 255.0);
 	}
 
 	/++
@@ -241,15 +241,15 @@ class RGB : Color!(ubyte, 3)
 		Returns:
 			New inverted color
 	+/
-	RGBColor invert()
+	RGB invert()
 	{
-		return new RGBColor(255 - R, 255 - G, 255 - B);
+		return RGB.getColor(255 - R, 255 - G, 255 - B);
 	}
 
 	/++ +/
 	override string toString()
 	{
-		return format("RGBColor(%d, %d, %d)", R, G, B);
+		return format("RGB(%d, %d, %d)", R, G, B);
 	}
 
 	version(RgbCachingOn) {
