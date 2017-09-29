@@ -62,7 +62,7 @@ class RGB : Color!(ubyte, 3)
 				return rgbManager.getColor(red, green, blue);
 		}
 
-		return RGB.getColor(red, green, blue);
+		return new RGB(red, green, blue);
 	}
 
 	public static RGB getColor(RGB color) {
