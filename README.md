@@ -17,7 +17,7 @@ GPLv3
       * PNG(based on dlib, loading/saving)
       * simple and convenient intermediate format (PPM P6)
       * PPM(loading/saving)
-      * PAM(loading savind)
+      * PAM(loading/saving)
    * processing
       *  grayscale
       *  negative
@@ -91,4 +91,4 @@ Package in your `dub.json`:
 ## Dependencies
 
 RIP needs dlib library for loading jpeg/png/bmp/tga files.
-WARNING: image can be saved ONLY in ppm/pam/png formats.
+*WARNING:* image can be saved ONLY in ppm/pam/png formats.
