@@ -16,6 +16,7 @@ class RGBManager {
 
 		this.fullInitialization = fullInitialization;
 
+		//Danger!!! FIX IT 
 		if(fullInitialization)
 			initizalizeFullSpace();
 	}
@@ -45,9 +46,9 @@ class RGBManager {
 	}
 
 	public RGBColor getColor(T, U, V)(T _red, U _green, V _blue) {
-		ubyte red = cast(ubyte) clamp(_red, 0, 255);
-		ubyte green = cast(ubyte) clamp(_green, 0, 255);
-		ubyte blue = cast(ubyte) clamp(_blue, 0, 255);
+		ubyte red = cast(ubyte) clamp(_red, cast(ubyte)0, cast(ubyte)255);
+		ubyte green = cast(ubyte) clamp(_green, cast(ubyte)0, cast(ubyte)255);
+		ubyte blue = cast(ubyte) clamp(_blue, cast(ubyte)0, cast(ubyte)255);
 
 		bool initialized = this.freeColorPlace(red, green, blue);
 

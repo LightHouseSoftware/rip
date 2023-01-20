@@ -9,6 +9,7 @@ private {
     import rip.concepts.surface;
     import rip.concepts.channel;
     import rip.concepts.ranges : toSurface;
+    import rip.concepts.templates;
 }
 
 struct Histogram {
@@ -24,16 +25,16 @@ struct Histogram {
     }
 }
 
-Histogram takeHistogram(Range)(in Range pixelRange, Channel channel)
+Histogram takeHistogram(Range)(Range pixelRange, Channel channel)
         if(isPixelRange!Range)
 {
     auto histogram = Histogram(channel);
-
-    pixelRange
-//        .getPixels()
-        .each!(
-            (color) => histogram[ channel.getIndex(color) ]++
-        );
+    
+    //kill me
+    for(auto _pixelRange = pixelRange; !_pixelRange.empty; _pixelRange.popFront()) {
+        auto clr = _pixelRange.front;
+        histogram.data[channel.getValue(clr)]++;
+    }
 
     return histogram;
 }
@@ -92,7 +93,7 @@ auto  equalizeHistogram(Histogram histogram) {
 
     uint size = histogram.channel.getRangeSize!uint;
 
-    equalizedHistogram = probability.map!(a => cast(uint)(a * size)).array;
+    equalizedHistogram.data = probability.map!(a => cast(uint)(a * size)).array;
     return equalizedHistogram;
 }
 

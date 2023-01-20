@@ -37,8 +37,8 @@ class Surface  {
 		auto calculateRealIndex(T, U)(T i, U j)
 			if (allArithmetic!(T, U))
 		{
-			auto W = cast(size_t) clamp(i, 0, width - 1);
-			auto H = cast(size_t) clamp(j, 0, height - 1);
+			auto W = cast(size_t) clamp(i, 0, cast(uint)(width - 1));
+			auto H = cast(size_t) clamp(j, 0, cast(uint)(height - 1));
 			auto S = width * height;
 
 			return clamp(W + H * width, 0, S);

@@ -44,7 +44,7 @@ enum DefaultChannels {
     /++ +/
     Red = new Channel(
         0.0f, 255.0f,
-        (in color) => color.red!int,
+        (in color) => color.red!uint,
         (in color, in value) => new RGBColor(
                 value,
                 color.green!ubyte,

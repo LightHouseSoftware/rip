@@ -1,4 +1,4 @@
-module rip.utils.staticFuncs;
+module rip.utils.staticFuncs; 
 
 static bool isGeneralOperation(string op) {
     switch (op)
