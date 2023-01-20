@@ -16,8 +16,8 @@ private
 +/
 class RGB : Color!(ubyte, 3)
 {
-	protected
-	{
+	// protected
+	// {
 		@property void R(T)(T value) {
 			super[0] = value;
 		}
@@ -41,7 +41,7 @@ class RGB : Color!(ubyte, 3)
 		@property auto B(T = ubyte)() const {
 			return super.getTypedByIndex!T(2);
 		}
-	}
+	// }
 
 	/++
 	+	Parametrized ctor for working with any arithmetic types

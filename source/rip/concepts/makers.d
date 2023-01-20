@@ -23,7 +23,7 @@ in {
             "V must belong to the segment [0, 1]");
     }
 }
-body {
+do {
     if(isNaN(h))
         return new RGBColor(0, 0, 0);
     else {
@@ -83,7 +83,7 @@ in {
             "L must belong to the segment [0, 1]");
     }
 }
-body {
+do {
     if(isNaN(h))
         return new RGBColor(0, 0, 0);
     else {
@@ -141,7 +141,7 @@ in {
     assert(k >= 0 && k <= 1,
         "K must belong to the segment [0, 1]");
 }
-body {
+do {
     return new RGBColor(
         round(255 * (1 - c) * (1 - k)),
         round(255 * (1 - m) * (1 - k)),
@@ -158,7 +158,7 @@ in {
     assert(z >= 0 && z <= 108.883f,
         "z must belong to the segment [0, 108.883]");
 }
-body {
+do {
     x /= 100.0f;
     y /= 100.0f;
     z /= 100.0f;
@@ -177,7 +177,7 @@ body {
 /++ ditto +/
 RGBColor makeLAB(float l, float a, float b)
 in {}
-body {
+do {
     const float E = 0.008856f;
     const float K = 903.3f;
 
