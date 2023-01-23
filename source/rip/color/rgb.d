@@ -262,6 +262,3 @@ class RGB : Color!(ubyte, 3)
 }
 
 alias RGBColor = RGB;
-
-//For unified using
-alias RGBColor = MainColor;

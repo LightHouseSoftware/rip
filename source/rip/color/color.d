@@ -42,6 +42,5 @@ protected:
         }
     }
 
-private:
     Type[N]     data;
 }
