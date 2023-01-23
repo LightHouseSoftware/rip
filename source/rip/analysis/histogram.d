@@ -5,7 +5,7 @@ private {
     import std.range;
     import std.math;
 
-    import rip.concepts.color;
+    import rip.color;
     import rip.concepts.surface;
     import rip.concepts.channel;
     import rip.concepts.ranges : toSurface;

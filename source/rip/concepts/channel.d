@@ -4,7 +4,7 @@ private {
     import std.algorithm;
     import std.math;
 
-    import rip.concepts.color;
+    import rip.color;
 }
 
 /++

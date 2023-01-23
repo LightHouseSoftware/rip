@@ -7,7 +7,7 @@ private
 
 	import rip.concepts.ranges;
 	import rip.concepts.templates;
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.surface;
 }
 

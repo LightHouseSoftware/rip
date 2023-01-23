@@ -6,7 +6,7 @@ private
 	import std.stdio;
 	import std.range;
 
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.surface;
 	import rip.concepts.templates;
 }

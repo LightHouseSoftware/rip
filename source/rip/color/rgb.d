@@ -6,7 +6,6 @@ private
 	import std.string;
 
 	import rip.color.color;
-	import rip.rt.rgbCaching;
 	import rip.concepts.templates;
 	import rip.utils.staticFuncs;
 }
@@ -57,20 +56,11 @@ class RGB : Color!(ubyte, 3)
 	}
 
 	public static RGB getColor(T, U, V)(T red, U green, V blue) {
-		version(RgbCachingOn) {
-			if(useRgbCaching)
-				return rgbManager.getColor(red, green, blue);
-		}
-
 		return new RGB(red, green, blue);
 	}
 
+	//???
 	public static RGB getColor(RGB color) {
-		version(RgbCachingOn) {
-			if(useRgbCaching)
-				return rgbManager.getColor(color);
-		}
-
 		return color;
 	}
 
@@ -250,14 +240,6 @@ class RGB : Color!(ubyte, 3)
 	override string toString() const
 	{
 		return format("RGB(%d, %d, %d)", R, G, B);
-	}
-
-	version(RgbCachingOn) {
-
-		static int getCached() {
-			return rgbManager.getCached;
-		}
-
 	}
 }
 

@@ -6,36 +6,16 @@ private
 	import std.math;
 	import std.range;
 
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.ranges;
 	import rip.concepts.surface;
 	import rip.processing.filters.linear;
 }
 
-version(RgbCachingOn) {
-	RGBColor result;
-
-	static this() {
-		result = new RGBColor(0, 0, 0);
-	}
-}
-
 // Точечная свертка
 auto elementaryConvolution(Signal, Filter)(Signal signal, Filter filter)
 {
-
-
-
-	version(RgbCachingOn) {
-		result.setRed = 0;
-		result.setGreen = 0;	
-		result.setBlue = 0;
-	}
-	else {
-		RGBColor result = new RGBColor(0, 0, 0);
-	}
-
-
+	RGBColor result = new RGBColor(0, 0, 0);
 
 	auto data = zip(signal, filter);
 	alias PairType = ElementType!(typeof(data));
@@ -53,15 +33,8 @@ auto elementaryConvolution(Signal, Filter)(Signal signal, Filter filter)
 	};
 
 	data.each!conv;
-
-
 	
-	version(RgbCachingOn) {
-		return RGBColor.getColor(result);
-	}
-	else {
-		return result;
-	}
+	return result;
 }
 
 // Свертка сигнала с линейным фильтром

@@ -5,7 +5,7 @@ protected {
     import std.stdio;
     import std.math;
 
-    import rip.concepts.color;
+    import rip.color;
 }
 
 /++

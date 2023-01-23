@@ -4,7 +4,7 @@ private
 {
 	import std.random;
 
-	import rip.concepts.color;
+	import rip.color.color;
 	import rip.concepts.surface;
 	import rip.concepts.templates;
 	import rip.draw.primitives;

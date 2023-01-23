@@ -5,7 +5,7 @@ private
 	import std.algorithm;
 	import std.math;
 
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.surface;
 	import rip.concepts.templates; 
 }

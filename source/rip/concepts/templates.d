@@ -6,7 +6,7 @@ private
 	import std.range;
 	import std.traits : isIntegral, isFloatingPoint, Unqual;
 
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.surface;
 }
 

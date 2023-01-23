@@ -9,7 +9,7 @@ private
 	import std.string;
 	import std.array;
 
-	import rip.concepts.color;
+	import rip.color;
 	import rip.concepts.ranges;
 	import rip.concepts.templates;
 }
