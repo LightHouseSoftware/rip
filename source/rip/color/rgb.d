@@ -247,7 +247,7 @@ class RGB : Color!(ubyte, 3)
 	}
 
 	/++ +/
-	override string toString()
+	override string toString() const
 	{
 		return format("RGB(%d, %d, %d)", R, G, B);
 	}
