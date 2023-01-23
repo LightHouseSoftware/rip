@@ -10,6 +10,14 @@ static class ColorSpaceConverter {
         return from.getMainColor();
     }
 
+    public static auto convertFromMainColor(T)(MainColor from)
+      //if(translatableToMainColor!F)    
+    {
+        auto newT = new T;
+        newT.fromMainColor(from);
+        return newT;
+    }
+
     public static auto convert(F, T)(F from) {
         auto newMainColor = from.getMainColor();
         auto newT = new T(0, 0, 0, 0);
