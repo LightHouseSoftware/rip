@@ -63,7 +63,7 @@ class Surface  {
 		pixels = uninitializedArray!(RGBColor[])(width * height);
 	}
 
-	void initialize(RGBColor color = RGBColor.getColor(0, 0, 0)) {
+	void initialize(RGBColor color = new RGBColor(0, 0, 0)) {
 		pixels = map!(a => color)(iota(width * height)).array;
 	}
 

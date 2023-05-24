@@ -2,11 +2,29 @@ module rip.color.color;
 
 import std.algorithm;
 
+enum DestionationMode {
+    Direct,
+    New
+}
+
+DestionationMode destMode = DestionationMode.New;
+
 class Color(Type, size_t N) {
 protected:
     this() {}
     this(T = Type) (T[] data...) {
         setChannels(data);
+    }
+
+    auto getColor(T, Args...)(Args args) {
+        if(destMode == DestionationMode.New) {   
+            return new T(args[1..$]);
+
+        }
+        else {
+            args[0].setChannels(args[1..$]);
+            return args[0];
+        }
     }
 
     void setChannels(T = Type) (T[] data...) {

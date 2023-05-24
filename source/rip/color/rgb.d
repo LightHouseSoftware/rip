@@ -54,9 +54,9 @@ class RGB : Color!(ubyte, 3)
 	{
 		super(red, green, blue);
 	}
-
-	public static RGB getColor(T, U, V)(T red, U green, V blue) {
-		return new RGB(red, green, blue);
+	
+	public RGB getColor(T, U, V)(T red, U green, V blue) {
+		return super.getColor!RGB (this, red, green, blue);
 	}
 
 	//???
@@ -102,7 +102,7 @@ class RGB : Color!(ubyte, 3)
 			rhs  	= second color
 	+/
 	RGB opBinary(string op)(auto ref RGB rhs)
-	{
+	{	
 		RGB result;
 
 		static if (isGeneralOperation(op))
